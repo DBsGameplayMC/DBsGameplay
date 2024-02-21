@@ -11,6 +11,7 @@ public class HelpCommand implements CommandExecutor {
     sender.sendMessage(ChatColor.GOLD + " ");
     sender.sendMessage(ChatColor.GOLD + ">> sellall um Blöcke und Erze zu verkaufen");
     sender.sendMessage(ChatColor.GOLD + ">> bupgrade um Pickaxe upzugraden");
+    sender.sendMessage(ChatColor.GOLD + ">> mine um die unterschiedlichen Minen zu betreten");
     return false;
   }
 }
