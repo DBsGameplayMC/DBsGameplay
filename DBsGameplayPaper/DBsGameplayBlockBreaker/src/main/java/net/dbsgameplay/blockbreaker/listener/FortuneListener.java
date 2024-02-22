@@ -51,7 +51,7 @@ public class FortuneListener implements Listener {
       if (clickedItem.getType() == Material.PAPER && displayName.startsWith(ChatColor.BLUE + "Pickaxe-Level ")) {
         int currentLevel = Integer.parseInt(displayName.substring(displayName.lastIndexOf(" ") + 1));
         if (currentLevel > 5)
-          return; 
+          return;
         player.getInventory().remove(Material.WOODEN_PICKAXE);
         if (currentLevel == 1) {
           PickaxeStarter.addstarterPickaxe(player, 1, 0, 1);
