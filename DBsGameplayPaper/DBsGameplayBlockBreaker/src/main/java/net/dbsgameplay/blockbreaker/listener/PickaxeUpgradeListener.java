@@ -48,7 +48,7 @@ public class PickaxeUpgradeListener implements Listener {
       if (clickedItem.getType() == Material.BARREL)
         new UpgradeGui(player); 
       String displayName = getItemDisplayNameInPlayerInventory(player, Material.WOODEN_PICKAXE);
-      if (displayName.startsWith(ChatColor.BLUE + "Pickaxe-Level ")) {
+      if (displayName != null && displayName.startsWith(ChatColor.BLUE + "Pickaxe-Level ")) {
         int currentLevel = Integer.parseInt(displayName.substring(displayName.lastIndexOf(" ") + 1));
         if (currentLevel >= 5)
           return; 
