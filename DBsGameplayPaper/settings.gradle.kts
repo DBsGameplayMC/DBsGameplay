@@ -7,3 +7,4 @@ include(":DBsGameplaySkyBlock")
 
 include(":DBsGameplayCore")
 project(":DBsGameplayCore").projectDir = File("../DBsGameplayCore")
+include("DBsGameplayAdminTool")

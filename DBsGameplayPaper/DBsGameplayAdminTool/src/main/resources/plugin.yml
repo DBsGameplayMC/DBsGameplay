@@ -1,0 +1,16 @@
+name: DBsGameplay-Admin-Tools
+version: '${version}'
+main: me.crayson.dbsgameplayadmintools.DBsGameplay_Admin_Tools
+api-version: '1.20'
+
+commands:
+  freeze:
+  unfreeze:
+  manage:
+    usage: /manage <player>
+    permission: manage.player
+    permission-message: No permission
+  managesup:
+    usage: /managesup <player>
+    permission: managesup.player
+    permission-message: No permission
