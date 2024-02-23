@@ -8,15 +8,16 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-
-    // Add the DBsGameplayPaperCore project as a dependency
+    compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
     implementation(project(":DBsGameplayPaperCore"))
 }
+
 
 tasks.test {
     useJUnitPlatform()

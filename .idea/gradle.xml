@@ -19,6 +19,7 @@
           <set>
             <option value="$PROJECT_DIR$/DBsGameplayCore" />
             <option value="$PROJECT_DIR$/DBsGameplayPaper" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayAdminTool" />
             <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayBlockBreaker" />
             <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayDungeonCrusher" />
             <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayPaperCore" />

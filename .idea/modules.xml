@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DBsGameplay.iml" filepath="$PROJECT_DIR$/.idea/DBsGameplay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplayAdminTool/DBsGameplayPaper.DBsGameplayAdminTool.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplayAdminTool/DBsGameplayPaper.DBsGameplayAdminTool.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplayBlockBreaker/DBsGameplayPaper.DBsGameplayBlockBreaker.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplayBlockBreaker/DBsGameplayPaper.DBsGameplayBlockBreaker.main.iml" />
     </modules>
   </component>

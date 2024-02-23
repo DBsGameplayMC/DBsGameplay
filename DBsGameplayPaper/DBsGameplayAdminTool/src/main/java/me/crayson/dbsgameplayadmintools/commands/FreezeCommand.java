@@ -1,8 +1,8 @@
 package me.crayson.dbsgameplayadmintools.commands;
 
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,28 +12,32 @@ import org.bukkit.potion.PotionEffectType;
 
 public class FreezeCommand implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)){
-            return false;
-        }
-        Player player = (Player) sender;
-        if (args.length != 1){
-            player.sendMessage(ChatColor.RED + "Verwendung: /freeze <Player_name>");
+            sender.sendMessage(ChatColor.RED + "Dieser Befehl kann nur von Spielern verwendet werden.");
             return true;
         }
-        if(Bukkit.getPlayer(args[0]) == null) {
-            player.sendMessage(ChatColor.RED + "Nicht online");
+
+        Player player = (Player) sender;
+
+        if (args.length != 1){
+            player.sendMessage(ChatColor.RED + "Verwendung: /freeze <Spielername>");
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
-        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW,Integer.MAX_VALUE, 255));
-        target.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,Integer.MAX_VALUE, 255));
-        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING,Integer.MAX_VALUE,255));
-        target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,255));
 
-        player.sendMessage(ChatColor.GREEN + target.getName() + " wurde gefreezt");
+        if (target == null) {
+            player.sendMessage(ChatColor.RED + "Der Spieler " + args[0] + " ist nicht online.");
+            return true;
+        }
+
+        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, Integer.MAX_VALUE, 255));
+        target.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, Integer.MAX_VALUE, 255));
+        target.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, Integer.MAX_VALUE, 255));
+        target.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 255));
+
+        player.sendMessage(ChatColor.GREEN + target.getName() + " wurde eingefroren.");
         return true;
     }
-
 }
