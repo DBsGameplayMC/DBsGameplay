@@ -16,16 +16,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class DBsGameplayBlockBreaker extends JavaPlugin {
   public void onEnable() {
-    // String url = "jdbc:mysql://localhost/fortune";
-    // String user = "root";
-    // String password = "";
-    // try {
-    //   Connection connection = DriverManager.getConnection(url, user, password);
-    //   System.out.println("Verbunden zur Datenbank Fortune");
-    // } catch (SQLException e) {
-    //   System.out.println("Verbindung fehlgeschlagen");
-    //   e.printStackTrace();
-    // }
     getCommand("pickaxe").setExecutor((CommandExecutor)new BasicPickeCommand());
     getCommand("sellall").setExecutor((CommandExecutor)new SellCommand());
     getCommand("bupgrade").setExecutor((CommandExecutor)new UpgradeCommand());
