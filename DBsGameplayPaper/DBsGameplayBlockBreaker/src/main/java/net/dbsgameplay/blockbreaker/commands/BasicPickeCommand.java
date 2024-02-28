@@ -1,6 +1,6 @@
 package net.dbsgameplay.blockbreaker.commands;
 
-import net.dbsgameplay.blockbreaker.items.PickaxeStarter;
+import net.dbsgameplay.blockbreaker.utils.PickaxeStarter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

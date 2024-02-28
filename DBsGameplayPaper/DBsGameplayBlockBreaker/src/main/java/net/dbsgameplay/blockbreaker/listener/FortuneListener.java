@@ -1,7 +1,7 @@
 package net.dbsgameplay.blockbreaker.listener;
 
 import net.dbsgameplay.blockbreaker.guis.UpgradeGui;
-import net.dbsgameplay.blockbreaker.items.PickaxeStarter;
+import net.dbsgameplay.blockbreaker.utils.PickaxeStarter;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

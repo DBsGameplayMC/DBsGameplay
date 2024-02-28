@@ -1,4 +1,4 @@
-package net.dbsgameplay.blockbreaker.items;
+package net.dbsgameplay.blockbreaker.utils;
 
 import java.util.ArrayList;
 import org.bukkit.ChatColor;

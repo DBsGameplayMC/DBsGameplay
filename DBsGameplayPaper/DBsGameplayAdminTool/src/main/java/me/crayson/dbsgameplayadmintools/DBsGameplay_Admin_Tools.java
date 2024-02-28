@@ -15,6 +15,7 @@ public final class DBsGameplay_Admin_Tools extends JavaPlugin {
         getCommand("unfreeze").setExecutor(new UnfreezCommand());
         getCommand("manage").setExecutor(new ManageCommand());
         getCommand("managesup").setExecutor(new ManagesupCommand());
+        getCommand("gamemodesup").setExecutor(new GamemodesupCommand());
 
         getServer().getPluginManager().registerEvents(new MenuListener(), this);
         getServer().getPluginManager().registerEvents(new ManagesupListener(), this);
