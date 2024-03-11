@@ -24,5 +24,6 @@ public final class DBsGameplay_Admin_Tools extends JavaPlugin {
     @Override
     public void onDisable() {
 
+        return null;
     }
 }
