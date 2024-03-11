@@ -3,11 +3,8 @@ package net.dbsgameplay.blockbreaker;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import net.dbsgameplay.blockbreaker.commands.BasicPickeCommand;
-import net.dbsgameplay.blockbreaker.commands.HelpCommand;
-import net.dbsgameplay.blockbreaker.commands.MinesCommand;
-import net.dbsgameplay.blockbreaker.commands.SellCommand;
-import net.dbsgameplay.blockbreaker.commands.UpgradeCommand;
+
+import net.dbsgameplay.blockbreaker.commands.*;
 import net.dbsgameplay.blockbreaker.listener.*;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
@@ -21,6 +18,9 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
     getCommand("bupgrade").setExecutor((CommandExecutor)new UpgradeCommand());
     getCommand("bhelp").setExecutor((CommandExecutor)new HelpCommand());
     getCommand("mine").setExecutor((CommandExecutor)new MinesCommand());
+    getCommand("blockbreaker").setExecutor((CommandExecutor)new BlockBreakerDefCommand());
+
+
     getServer().getPluginManager().registerEvents((Listener)new VerkaufenListener(), (Plugin)this);
     getServer().getPluginManager().registerEvents((Listener)new UpgradeListener(), (Plugin)this);
     getServer().getPluginManager().registerEvents((Listener)new PlayerJoinLeaveListener(), (Plugin)this);

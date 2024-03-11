@@ -5,8 +5,9 @@ api-version: '1.20'
 
 commands:
   pickaxe:
-    permissiom: blockbreaker.get
+    permission: blockbreaker.get
   sellall:
   bupgrade:
   bhelp:
   mine:
+  blockbreaker:

@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class PickaxeStarter {
-  public static void addstarterPickaxe(Player player, int fortune, int effi, int level) {
+public static void addstarterPickaxe(Player player, int fortune, int effi, int level) {
     ItemStack item = new ItemStack(Material.WOODEN_PICKAXE, 1);
     ItemMeta meta = item.getItemMeta();
     meta.setDisplayName(ChatColor.BLUE + "Pickaxe-Level Starter " + level);
