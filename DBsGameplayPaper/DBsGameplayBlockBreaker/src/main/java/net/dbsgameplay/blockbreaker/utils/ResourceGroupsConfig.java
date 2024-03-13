@@ -1,6 +1,6 @@
 package net.dbsgameplay.blockbreaker.utils;
 
-import net.dbsgameplay.blockbreaker.utils.models.mdlresourcegroup;
+import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroup;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -8,45 +8,61 @@ import org.bukkit.plugin.Plugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.Optional;
 
-
+/**
+ * Verwaltet die Konfigurationsdatei für RecourceGroups.
+ */
 public class ResourceGroupsConfig {
-    private Plugin plugin;
-    private File configFile;
-    private FileConfiguration config;
+    private static final String RESOURCE_GROUPS_PATH = "resourcegroups";
+    private static final String NAME_PATH = "name";
+    private static final String RESOURCE_TYPE_PATH = "resourcetype";
+    private static final String BASE_XP_PATH = "basexp";
+    private static final String LEVEL_PATH = "level";
 
+    private final Plugin plugin;
+    private final File configFile;
+    private final FileConfiguration config;
+
+    /**
+     * Erstellt eine neue Instanz von ResourceGroupsConfig.
+     *
+     * @param plugin   Die Instanz des Paper-Plugins, zu dem diese Konfiguration gehört.
+     * @param fileName Der Name der Konfigurationsdatei.
+     */
     public ResourceGroupsConfig(Plugin plugin, String fileName) {
         this.plugin = plugin;
         this.configFile = new File(plugin.getDataFolder(), fileName);
 
-        // Prüfe, ob Plugin-Ordner existiert
         if (!plugin.getDataFolder().exists()) {
             plugin.getDataFolder().mkdirs();
         }
 
-        // Prüfe, ob Config-Datei existiert
         if (!configFile.exists()) {
-            // Erstelle Config-Ordner
             configFile.getParentFile().mkdirs();
 
             try {
-            // Erstelle Config-Datei
-            configFile.createNewFile();
-            } catch (IOException e)
-            {
+                configFile.createNewFile();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        // Lade YamlConfiguration
         this.config = YamlConfiguration.loadConfiguration(configFile);
     }
 
+    /**
+     * Gibt die Konfiguration zurück.
+     *
+     * @return Die FileConfiguration-Instanz.
+     */
     public FileConfiguration getConfig() {
         return config;
     }
 
+    /**
+     * Speichert die Konfiguration in der Datei.
+     */
     public void saveConfig() {
         try {
             config.save(configFile);
@@ -55,34 +71,49 @@ public class ResourceGroupsConfig {
         }
     }
 
-    public mdlresourcegroup getresourcegroup (String name) {
-        AtomicReference<mdlresourcegroup> mdltoreturn = null;
-        config.getConfigurationSection("resourcegroups").getKeys(false).forEach(resourcegroup->{
-            String configname = config.getString("resourcegroups." +  resourcegroup + ".name");
-            if (configname == name){
-
-                String resourcetyp = config.getString("resourcegroups." +  resourcegroup + ".resourcetype");
-                Integer basexp = config.getInt("resourcegroups." +  resourcegroup + ".basexp");
-                Integer level = config.getInt("resourcegroups." +  resourcegroup + ".level");
-                mdltoreturn.set(new mdlresourcegroup(resourcegroup, configname, resourcetyp, basexp, level));
-            }
-        });
-        return mdltoreturn.get();
-    }
-    public boolean returntrueorfalse(String name){
-        if (getresourcegroup(name) == null){
-            return false;
-        }else {
-            return true;
-        }
+    /**
+     * Sucht nach einer ResourceGroup anhand des Namens.
+     *
+     * @param name Der Name der ResourceGroup.
+     * @return Ein Optional, das ein MdlResourceGroup-Objekt enthält, falls gefunden.
+     */
+    public Optional<MdlResourceGroup> getResourceGroup(String name) {
+        return config.getConfigurationSection(RESOURCE_GROUPS_PATH).getKeys(false).stream()
+                .filter(resourceGroup -> name.equals(config.getString(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + NAME_PATH)))
+                .findFirst()
+                .map(resourceGroup -> {
+                    String resourceType = config.getString(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + RESOURCE_TYPE_PATH);
+                    int baseXP = config.getInt(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + BASE_XP_PATH);
+                    int level = config.getInt(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + LEVEL_PATH);
+                    return new MdlResourceGroup(resourceGroup, name, resourceType, baseXP, level);
+                });
     }
 
+    /**
+     * Überprüft, ob eine ResourceGroup mit dem angegebenen Namen existiert.
+     *
+     * @param name Der Name der ResourceGroup.
+     * @return true, wenn die ResourceGroup existiert; sonst false.
+     */
+    public boolean existsResourceGroup(String name){
+        return getResourceGroup(name).isPresent();
+    }
+
+    /**
+     * Fügt eine neue ResourceGroup zur Konfiguration hinzu.
+     *
+     * @param groupId      Die ID der ResourceGroup.
+     * @param groupName    Der Name der ResourceGroup.
+     * @param resourceType Der Typ der Ressourcen in der Gruppe.
+     * @param baseXP       Die Basis-XP für die ResourceGroup.
+     * @param level        Das Level der ResourceGroup.
+     */
     public void addResourceGroup(String groupId, String groupName, String resourceType, int baseXP, int level) {
-        ConfigurationSection groupSection = config.createSection("resourcegroups." + groupId);
-        groupSection.set("name", groupName);
-        groupSection.set("resourcetype", resourceType);
-        groupSection.set("basexp", baseXP);
-        groupSection.set("level", level);
+        ConfigurationSection groupSection = config.createSection(RESOURCE_GROUPS_PATH + "." + groupId);
+        groupSection.set(NAME_PATH, groupName);
+        groupSection.set(RESOURCE_TYPE_PATH, resourceType);
+        groupSection.set(BASE_XP_PATH, baseXP);
+        groupSection.set(LEVEL_PATH, level);
 
         saveConfig();
     }

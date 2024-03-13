@@ -1,11 +1,14 @@
 package net.dbsgameplay.blockbreaker.commands;
 
+import net.dbsgameplay.blockbreaker.DBsGameplayBlockBreaker;
 import net.dbsgameplay.blockbreaker.utils.PickaxeDefine;
+import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroup;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import net.dbsgameplay.blockbreaker.utils.ResourceGroupsConfig;
 import java.util.Arrays;
@@ -55,11 +58,17 @@ public class BlockBreakerDefCommand implements CommandExecutor {
         // Codeabschnitt für /blockbreaker define area <ResourceAreaName> <ResourceGroupName>
         if (sender.hasPermission("dbsgameplay.blockbreaker.definegroup")){
         if (args[0].equalsIgnoreCase("define") && args[1].equalsIgnoreCase("area")) {
+            if (DBsGameplayBlockBreaker.Test == Boolean.TRUE){
+                System.out.println(DBsGameplayBlockBreaker.Test);
             PickaxeDefine.addPickaxeDef((Player) sender);
             sender.sendMessage("[§2I§7] Zwei Punkte mit der Pickaxe mit Links Klick auswählen");
-        }}
+        }else {
+                sender.sendMessage("[§c!§7] ResourceGroup exestiert nicht");
+            }
+        }
 
 
         return true;
     }
-}
+        return false;
+    }}

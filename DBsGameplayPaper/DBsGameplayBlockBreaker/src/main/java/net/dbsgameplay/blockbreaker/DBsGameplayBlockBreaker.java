@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class DBsGameplayBlockBreaker extends JavaPlugin {
 
   private ResourceGroupsConfig resourceGroupsConfig;
-
+  public static Boolean Test;
   public void onEnable() {
     getCommand("pickaxe").setExecutor((CommandExecutor)new BasicPickeCommand());
     getCommand("sellall").setExecutor((CommandExecutor)new SellCommand());
@@ -25,7 +25,8 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
 
     resourceGroupsConfig = new ResourceGroupsConfig(this,"/areas/ResourceGroups.yml");
     getCommand("blockbreaker").setExecutor((CommandExecutor)new BlockBreakerDefCommand(resourceGroupsConfig));
-    System.out.println(resourceGroupsConfig.returntrueorfalse("123Test"));
+    System.out.println(resourceGroupsConfig.existsResourceGroup("123Test"));
+    Test = resourceGroupsConfig.existsResourceGroup("123Test");
 
     getServer().getPluginManager().registerEvents((Listener)new VerkaufenListener(), (Plugin)this);
     getServer().getPluginManager().registerEvents((Listener)new UpgradeListener(), (Plugin)this);

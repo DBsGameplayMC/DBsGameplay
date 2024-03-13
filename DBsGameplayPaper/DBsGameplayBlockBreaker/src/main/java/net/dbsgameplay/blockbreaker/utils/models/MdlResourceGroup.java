@@ -1,10 +1,10 @@
 package net.dbsgameplay.blockbreaker.utils.models;
 
-public class mdlresourcegroup {
+public class MdlResourceGroup {
 
     String groupId; String groupName; String resourceType; int baseXP; int level;
 
-    public mdlresourcegroup(String groupId, String groupName, String resourceType, int baseXP, int level) {
+    public MdlResourceGroup(String groupId, String groupName, String resourceType, int baseXP, int level) {
 
         this.groupId = groupId;
         this.groupName = groupName;
