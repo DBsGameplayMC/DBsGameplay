@@ -2,13 +2,11 @@ package net.dbsgameplay.blockbreaker.commands;
 
 import net.dbsgameplay.blockbreaker.DBsGameplayBlockBreaker;
 import net.dbsgameplay.blockbreaker.utils.PickaxeDefine;
-import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroup;
-import org.bukkit.ChatColor;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import net.dbsgameplay.blockbreaker.utils.ResourceGroupsConfig;
 import java.util.Arrays;
@@ -17,13 +15,15 @@ import java.util.UUID;
 
 public class BlockBreakerDefCommand implements CommandExecutor {
     private ResourceGroupsConfig resourceGroupsConfig;
-    public BlockBreakerDefCommand(ResourceGroupsConfig resourceGroupsConfig) {
+    private DBsGameplayBlockBreaker plugin;
+    public BlockBreakerDefCommand(DBsGameplayBlockBreaker plugin, ResourceGroupsConfig resourceGroupsConfig){
         this.resourceGroupsConfig = resourceGroupsConfig;
+        this.plugin = plugin;
     }
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("[§c!§7] Command §cnur Ingame §7verfügbar");
+            sender.sendMessage("§7[§c!§7] Command §cnur Ingame §7verfügbar");
 
             return true;
         }
@@ -46,9 +46,9 @@ public class BlockBreakerDefCommand implements CommandExecutor {
 
                     resourceGroupsConfig.addResourceGroup(groupId, groupName, resourceType, baseXP, level);
 
-                    sender.sendMessage("[§2I§7] Du hast §2erfolgreich §7die ResourceGroup " + groupName + " erstellt, mit dem ResourceTyp " + resourceType);
+                    sender.sendMessage("§7[§2I§7] Du hast §2erfolgreich §7die ResourceGroup " + groupName + " erstellt, mit dem ResourceTyp " + resourceType);
                 } else {
-                    sender.sendMessage("[§c!§7] §cUngültige Option §7für die ResourceGroup");
+                    sender.sendMessage("§7[§c!§7] §cUngültige Option §7für die ResourceGroup");
                 }
             }
         }
@@ -58,13 +58,12 @@ public class BlockBreakerDefCommand implements CommandExecutor {
         // Codeabschnitt für /blockbreaker define area <ResourceAreaName> <ResourceGroupName>
         if (sender.hasPermission("dbsgameplay.blockbreaker.definegroup")){
         if (args[0].equalsIgnoreCase("define") && args[1].equalsIgnoreCase("area")) {
-            if (DBsGameplayBlockBreaker.Test == Boolean.TRUE){
-                System.out.println(DBsGameplayBlockBreaker.Test);
-            PickaxeDefine.addPickaxeDef((Player) sender);
-            sender.sendMessage("[§2I§7] Zwei Punkte mit der Pickaxe mit Links Klick auswählen");
+        if (this.plugin.existsResourceGroup(args[3])){
+            sender.sendMessage("§7[§2I§7] Markiere mit der Pickaxe §2zwei Punkte");
+            PickaxeDefine.addPickaxeDef(((Player) sender).getPlayer());
         }else {
-                sender.sendMessage("[§c!§7] ResourceGroup exestiert nicht");
-            }
+            sender.sendMessage("§7[§c!§7] §cUngültige Option §7für die ResourceGroup");
+        }
         }
 
 

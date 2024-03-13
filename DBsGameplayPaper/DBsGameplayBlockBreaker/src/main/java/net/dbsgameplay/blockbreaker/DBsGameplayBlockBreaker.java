@@ -1,9 +1,5 @@
 package net.dbsgameplay.blockbreaker;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import net.dbsgameplay.blockbreaker.commands.*;
 import net.dbsgameplay.blockbreaker.listener.*;
 import net.dbsgameplay.blockbreaker.utils.ResourceGroupsConfig;
@@ -15,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class DBsGameplayBlockBreaker extends JavaPlugin {
 
   private ResourceGroupsConfig resourceGroupsConfig;
-  public static Boolean Test;
+
   public void onEnable() {
     getCommand("pickaxe").setExecutor((CommandExecutor)new BasicPickeCommand());
     getCommand("sellall").setExecutor((CommandExecutor)new SellCommand());
@@ -24,9 +20,9 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
     getCommand("mine").setExecutor((CommandExecutor)new MinesCommand());
 
     resourceGroupsConfig = new ResourceGroupsConfig(this,"/areas/ResourceGroups.yml");
-    getCommand("blockbreaker").setExecutor((CommandExecutor)new BlockBreakerDefCommand(resourceGroupsConfig));
+    getCommand("blockbreaker").setExecutor((CommandExecutor)new BlockBreakerDefCommand(this, resourceGroupsConfig));
     System.out.println(resourceGroupsConfig.existsResourceGroup("123Test"));
-    Test = resourceGroupsConfig.existsResourceGroup("123Test");
+
 
     getServer().getPluginManager().registerEvents((Listener)new VerkaufenListener(), (Plugin)this);
     getServer().getPluginManager().registerEvents((Listener)new UpgradeListener(), (Plugin)this);
@@ -36,9 +32,15 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
     getServer().getPluginManager().registerEvents((Listener)new PickaxeUpgradeListener(), (Plugin)this);
     getServer().getPluginManager().registerEvents((Listener)new MineListener(), (Plugin)this);
   }
-  
-  public void onDisable() {
 
+  public ResourceGroupsConfig getResourceGroupConfig() {
+    return this.resourceGroupsConfig;
+  }
+  // Beispiel: Nur true oder false:
+  public boolean existsResourceGroup(String name) {
+    return this.resourceGroupsConfig.existsResourceGroup(name);
+  }
+  public void onDisable() {
   }
 
   public ResourceGroupsConfig getResourceGroupsConfig() {
