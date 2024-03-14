@@ -38,17 +38,13 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
     public void loadConfig() {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
-            System.out.println("File exists? -> " + file.exists());
             if (!file.exists()) {
-                System.out.println("Create file");
-                System.out.println("File path: " + file.getPath());
                 if (file.createNewFile()) {
                     T instance = type.newInstance();
                     saveConfig();
                     Bukkit.getLogger().info("Die Konfigurationsdatei \"" + file.getName() + "\" wurde erstellt.");
                 }
             }
-            System.out.println("Load file: " + file.getName());
 
             this.configModel = mapper.readValue(file, type);
 
@@ -61,6 +57,9 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
      * Speichert die geladene Konfiguration in der Konfigurationsdatei.
      */
     public void saveConfig()  {
+        if (this.configModel == null)
+            return;
+
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         try {
             mapper.writeValue(file, this.configModel);
@@ -70,18 +69,31 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
     }
 
     /**
+     * Speichert das angegebene Konfigurationsmodel in der Konfigurationsdatei.
+     *
+     * @param configModel Das Konfigurationsmodel, das gespeichert werden soll.
+     */
+    public void saveConfig(T configModel)  {
+        if (this.configModel == null)
+            return;
+
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        try {
+            mapper.writeValue(file, configModel);
+        } catch (IOException e) {
+            Bukkit.getLogger().severe("Fehler beim Speichern der Konfigurationsdatei \"" + file.getName() + "\"." + file.getName());
+        }
+    }
+
+    /**
      * Gibt das geladene Konfigurationsmodel zurück.
+     * Falls das Konfigurationsmodel noch nicht geladen wurde, wird es geladen.
      *
      * @return Das geladene Konfigurationsmodel.
      */
     public T getConfigModel() {
         if (configModel == null) {
-            System.out.println("ConfigModel is null");
             loadConfig();
-        }
-
-        if (configModel == null) {
-            System.out.println("ConfigModel is still null");
         }
 
         return configModel;

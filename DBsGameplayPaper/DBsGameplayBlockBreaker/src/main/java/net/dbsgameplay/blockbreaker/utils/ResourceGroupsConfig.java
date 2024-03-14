@@ -78,8 +78,6 @@ public class ResourceGroupsConfig {
      * @return Ein Optional, das ein MdlResourceGroupConfig-Objekt enthält, falls gefunden.
      */
     public Optional<MdlResourceGroupConfig> getResourceGroup(String name) {
-        System.out.println("ResourceGroupsConfig.getResourceGroup config" + config);
-
         ConfigurationSection resourceGroupSection = config.getConfigurationSection(RESOURCE_GROUPS_PATH);
 
         if (resourceGroupSection == null) {
