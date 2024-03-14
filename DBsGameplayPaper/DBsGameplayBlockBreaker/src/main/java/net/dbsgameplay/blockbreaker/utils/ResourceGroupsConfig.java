@@ -1,6 +1,6 @@
 package net.dbsgameplay.blockbreaker.utils;
 
-import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroup;
+import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroupConfig;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -75,18 +75,28 @@ public class ResourceGroupsConfig {
      * Sucht nach einer ResourceGroup anhand des Namens.
      *
      * @param name Der Name der ResourceGroup.
-     * @return Ein Optional, das ein MdlResourceGroup-Objekt enthält, falls gefunden.
+     * @return Ein Optional, das ein MdlResourceGroupConfig-Objekt enthält, falls gefunden.
      */
-    public Optional<MdlResourceGroup> getResourceGroup(String name) {
-        return config.getConfigurationSection(RESOURCE_GROUPS_PATH).getKeys(false).stream()
-                .filter(resourceGroup -> name.equals(config.getString(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + NAME_PATH)))
-                .findFirst()
-                .map(resourceGroup -> {
-                    String resourceType = config.getString(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + RESOURCE_TYPE_PATH);
-                    int baseXP = config.getInt(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + BASE_XP_PATH);
-                    int level = config.getInt(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + LEVEL_PATH);
-                    return new MdlResourceGroup(resourceGroup, name, resourceType, baseXP, level);
-                });
+    public Optional<MdlResourceGroupConfig> getResourceGroup(String name) {
+        System.out.println("ResourceGroupsConfig.getResourceGroup config" + config);
+
+        ConfigurationSection resourceGroupSection = config.getConfigurationSection(RESOURCE_GROUPS_PATH);
+
+        if (resourceGroupSection == null) {
+            return Optional.empty();
+        }
+
+        //return config.getConfigurationSection(RESOURCE_GROUPS_PATH).getKeys(false).stream()
+         //       .filter(resourceGroup -> name.equals(config.getString(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + NAME_PATH)))
+          //      .findFirst()
+          //      .map(resourceGroup -> {
+          //          String resourceType = config.getString(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + RESOURCE_TYPE_PATH);
+          //          int baseXP = config.getInt(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + BASE_XP_PATH);
+          //          int level = config.getInt(RESOURCE_GROUPS_PATH + "." + resourceGroup + "." + LEVEL_PATH);
+          //          return new MdlResourceGroupConfig(resourceGroup, name, resourceType, baseXP, level);
+          //      });
+
+        return Optional.empty();
     }
 
     /**
