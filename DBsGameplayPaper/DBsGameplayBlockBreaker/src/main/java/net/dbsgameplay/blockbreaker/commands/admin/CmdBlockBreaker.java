@@ -31,15 +31,13 @@ public class CmdBlockBreaker implements IConfigCommandExecutor<MdlResourceGroupC
         if (arguments[0].equalsIgnoreCase("define")) {
 
             if (arguments.length == 1) {
-                basePlayer.sendInfoMessage("Lenght of arguments (in define): " + arguments.length);
                 basePlayer.sendErrorMessage("Fehlende Argumente für den Befehl §b/BlockBreaker Define§7.");
                 basePlayer.sendArrowMessage("Korrekte Verwendung: §8/§bBlockBreaker Define Group §8<§aName§8> §8<§3ResourceAreaType§8> §8<§eBaseXP§8> §8<§eLevel§8>");
                 return false;
             }
-
+            // region Argument "Group"
             if (arguments[1].equalsIgnoreCase("group")) {
                 if (arguments.length < 6) {
-                    basePlayer.sendInfoMessage("Lenght of arguments (in group): " + arguments.length);
                     basePlayer.sendErrorMessage("Fehlende Argumente für den Befehl §b/BlockBreaker Define§7.");
                     basePlayer.sendArrowMessage("Korrekte Verwendung: §8/§bBlockBreaker Define Group §8<§aName§8> §8<§3ResourceAreaType§8> §8<§eBaseXP§8> §8<§eLevel§8>");
                     return false;
@@ -103,15 +101,19 @@ public class CmdBlockBreaker implements IConfigCommandExecutor<MdlResourceGroupC
                 }
 
                 return false;
+            // endregion
+            // region Argument "Area"
             } else if (arguments[1].equalsIgnoreCase("area")) {
                 basePlayer.sendWarnMessage("/blockbreaker define area is WIP");
                 return false;
+            // endregion
             } else {
+
                 basePlayer.sendErrorMessage("Das Argument §b" + arguments[1] + " §7wurde §cnicht §7gefunden!");
                 basePlayer.sendArrowMessage("§8/§bBlockBreaker Help §7für Hilfe.");
 
             }
-        // region Argument "Redefine"
+            // region Argument "Redefine"
         } else if (arguments[0].equalsIgnoreCase("redefine")) {
             basePlayer.sendWarnMessage("/blockbreaker redefine is WIP");
             return false;

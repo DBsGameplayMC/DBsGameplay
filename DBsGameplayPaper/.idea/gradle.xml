@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../DBsGameplayCore" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/DBsGameplayAdminTool" />
             <option value="$PROJECT_DIR$/DBsGameplayBlockBreaker" />
+            <option value="$PROJECT_DIR$/DBsGameplayCore" />
             <option value="$PROJECT_DIR$/DBsGameplayDungeonCrusher" />
-            <option value="$PROJECT_DIR$/DBsGameplayPaperCore" />
             <option value="$PROJECT_DIR$/DBsGameplaySkyBlock" />
           </set>
         </option>
