@@ -3,7 +3,7 @@ package net.dbsgameplay.blockbreaker.utils.constants;
 /**
  * Enthält die Pfade zu den Konfigurationsdateien des BlockBreakers.
  */
-public final class BBFilePaths {
+public final class FilePaths {
 
     /**
      * Der Name des Plugin-Ordners des BlockBreakers.

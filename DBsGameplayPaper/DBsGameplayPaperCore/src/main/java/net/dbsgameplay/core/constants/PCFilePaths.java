@@ -1,4 +1,4 @@
-package net.dbsgameplay.core;
+package net.dbsgameplay.core.constants;
 
 /**
  * Enthält die Pfade zu den Konfigurationsdateien des PaperCore-Plugins.

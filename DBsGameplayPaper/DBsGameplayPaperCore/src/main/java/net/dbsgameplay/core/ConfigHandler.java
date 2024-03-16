@@ -66,6 +66,9 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
         } catch (IOException e) {
             Bukkit.getLogger().severe("Fehler beim Speichern der Konfigurationsdatei \"" + file.getName() + "\"." + file.getName());
         }
+
+        this.configModel = null;
+        this.loadConfig();
     }
 
     /**

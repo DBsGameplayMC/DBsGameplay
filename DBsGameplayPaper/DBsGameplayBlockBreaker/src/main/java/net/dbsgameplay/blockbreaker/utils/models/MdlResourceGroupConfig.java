@@ -1,6 +1,12 @@
 package net.dbsgameplay.blockbreaker.utils.models;
 
+import net.dbsgameplay.blockbreaker.utils.enums.ResourceGroupType;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.text.html.Option;
 import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Enthält die Daten der ResourceGroups des BlockBreakers.
@@ -16,10 +22,37 @@ public class MdlResourceGroupConfig {
     }
 
     /**
-     * Setzt die ResourceGroups der Konfiguration.
+     * Gibt eine ResourceGroup anhand ihres Namens zurück.
+     *
+     * @param name Name der ResourceGroup, die zurückgegeben werden soll.
      */
-    public void setResourcegroups(Map<String, ResourceGroup> resourcegroups) {
-        this.resourcegroups = resourcegroups;
+    public ResourceGroup getResourceGroupByName(String name) {
+
+        Optional<String> resourceGroupId = this.resourcegroups.keySet().stream().filter(key -> this.resourcegroups.get(key).getName().equals(name)).findFirst();
+
+        return resourceGroupId.map(s -> this.resourcegroups.get(s)).orElse(null);
+    }
+
+    /**
+     * Fügt eine ResourceGroup hinzu oder aktualisiert eine bestehende ResourceGroup.
+     */
+    public void addOrUpdateResourceGroup(@NotNull ResourceGroup resourceGroup) {
+
+        String idToSave = getIdByName(resourceGroup.getName());
+
+        if (this.resourcegroups.containsKey(idToSave)) {
+            this.resourcegroups.replace(idToSave, resourceGroup);
+        } else {
+            this.resourcegroups.put(UUID.randomUUID().toString(), resourceGroup);
+        }
+    }
+
+    /**
+     * Gibt die ID einer ResourceGroup anhand ihres Namens zurück.
+     */
+    public String getIdByName(String name){
+        Optional<String> resourceGroupId = this.resourcegroups.keySet().stream().filter(key -> this.resourcegroups.get(key).getName().equals(name)).findFirst();
+        return resourceGroupId.orElse(null);
     }
 
     /**
@@ -27,7 +60,7 @@ public class MdlResourceGroupConfig {
      */
     public static class ResourceGroup {
         private String name;
-        private String resourcetype;
+        private ResourceGroupType resourcetype;
         private int basexp;
         private int level;
 
@@ -44,7 +77,7 @@ public class MdlResourceGroupConfig {
          * @param basexp       Die Basis-XP der ResourceGroup.
          * @param level        Das Level der ResourceGroup gegenüber anderen ResourceGroups.
          */
-        public ResourceGroup(String name, String resourcetype, int basexp, int level) {
+        public ResourceGroup(String name, ResourceGroupType resourcetype, int basexp, int level) {
             this.name = name;
             this.resourcetype = resourcetype;
             this.basexp = basexp;
@@ -68,14 +101,14 @@ public class MdlResourceGroupConfig {
         /**
          * Gibt den ResourceType der ResourceGroup zurück.
          */
-        public String getResourcetype() {
+        public ResourceGroupType getResourcetype() {
             return resourcetype;
         }
 
         /**
          * Setzt den ResourceType der ResourceGroup.
          */
-        public void setResourcetype(String resourcetype) {
+        public void setResourcetype(ResourceGroupType resourcetype) {
             this.resourcetype = resourcetype;
         }
 

@@ -1,6 +1,5 @@
 package net.dbsgameplay.blockbreaker.listener;
 
-import net.dbsgameplay.blockbreaker.utils.ScoreBoardUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +16,6 @@ public class PlayerJoinLeaveListener implements Listener {
     event.setJoinMessage(ChatColor.GREEN + "[+] " + ChatColor.WHITE + event.getPlayer().getName());
     Player player = event.getPlayer();
     player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 2147483647, 0, true, false));
-    event.getPlayer().setScoreboard(ScoreBoardUtils.getBaseScoreboard(event.getPlayer()));
   }
   
   @EventHandler

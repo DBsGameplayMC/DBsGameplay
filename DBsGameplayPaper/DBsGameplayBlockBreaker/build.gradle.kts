@@ -24,6 +24,8 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.0.1")
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.16.2")
+    // https://docs.advntr.dev/getting-started.html
+    implementation("net.kyori:adventure-api:4.16.0")
 
     compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
 

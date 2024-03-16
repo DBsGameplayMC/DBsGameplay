@@ -1,8 +1,6 @@
 package net.dbsgameplay.blockbreaker.listener;
 
 import net.dbsgameplay.blockbreaker.guis.UpgradeGui;
-import net.dbsgameplay.blockbreaker.utils.PickaxeStarter;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,43 +33,5 @@ public class PickaxeUpgradeListener implements Listener {
       } 
     } 
     return null;
-  }
-  
-  @EventHandler
-  public void onInventoryClick(InventoryClickEvent event) {
-    if (event.getView().getTitle().equals(ChatColor.GREEN + "Pickaxe Upgraden")) {
-      event.setCancelled(true);
-      Player player = (Player)event.getWhoClicked();
-      ItemStack clickedItem = event.getCurrentItem();
-      if (clickedItem == null || clickedItem.getType() == Material.AIR)
-        return; 
-      if (clickedItem.getType() == Material.BARREL)
-        new UpgradeGui(player); 
-      String displayName = getItemDisplayNameInPlayerInventory(player, Material.WOODEN_PICKAXE);
-      if (displayName != null && displayName.startsWith(ChatColor.BLUE + "Pickaxe-Level ")) {
-        int currentLevel = Integer.parseInt(displayName.substring(displayName.lastIndexOf(" ") + 1));
-        if (currentLevel >= 5)
-          return; 
-        int requiredPaper = currentLevel + 10;
-        if (countItems(player, Material.PAPER) < requiredPaper) {
-          player.sendMessage(ChatColor.RED + "Nicht genug Geld");
-          return;
-        } 
-        player.getInventory().remove(Material.WOODEN_PICKAXE);
-        if (currentLevel == 1) {
-          PickaxeStarter.addstarterPickaxe(player, 0, 1, 2);
-        } else if (currentLevel == 2) {
-          PickaxeStarter.addstarterPickaxe(player, 0, 2, 3);
-        } else if (currentLevel == 3) {
-          PickaxeStarter.addstarterPickaxe(player, 0, 3, 4);
-        } else if (currentLevel == 4) {
-          PickaxeStarter.addstarterPickaxe(player, 0, 4, 5);
-        } 
-        player.getInventory().removeItem(new ItemStack[] { new ItemStack(Material.PAPER, requiredPaper) });
-        player.sendMessage(ChatColor.GREEN + "Pickaxe auf Level " + (currentLevel + 1) + " upgegradet");
-        if (displayName == null)
-          return; 
-      } 
-    } 
   }
 }
