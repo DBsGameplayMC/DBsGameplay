@@ -1,6 +1,6 @@
 package net.dbsgameplay.core.constants;
 
-public final class PCPermissions {
+public final class Permissions {
 
     /**
      * Permission-Prefix für Plugins des DBsGameplay Minecraft-Netzwerks.

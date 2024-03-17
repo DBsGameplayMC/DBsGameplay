@@ -5,7 +5,7 @@ import net.dbsgameplay.blockbreaker.commands.controlling.interfaces.IConfigComma
 import net.dbsgameplay.blockbreaker.utils.BasePlayer;
 import net.dbsgameplay.blockbreaker.utils.constants.Permissions;
 import net.dbsgameplay.blockbreaker.utils.enums.ResourceGroupType;
-import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroupConfig;
+import net.dbsgameplay.blockbreaker.utils.configmodels.MdlResourceGroupConfig;
 import net.dbsgameplay.core.ConfigHandler;
 import org.bukkit.command.Command;
 

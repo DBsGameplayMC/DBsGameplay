@@ -1,6 +1,6 @@
-package net.dbsgameplay.blockbreaker.utils.models;
+package net.dbsgameplay.blockbreaker.utils.configmodels;
 
-public class MdlMessages {
+public class MdlMessagesConfig {
 
     public static class Common {
         private String noPermission = "";

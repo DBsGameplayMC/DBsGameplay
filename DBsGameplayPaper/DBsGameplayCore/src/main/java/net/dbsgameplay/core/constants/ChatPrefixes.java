@@ -1,11 +1,9 @@
 package net.dbsgameplay.core.constants;
 
-import org.bukkit.ChatColor;
-
 /**
  * Enthält die Chat-Präfixe für den Minecraft-Chat.
  */
-public final class PCChatPrefixes {
+public final class ChatPrefixes {
 
     /**
      * Präfix des DBsGameplay Minecraft-Netzwerks.

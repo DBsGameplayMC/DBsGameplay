@@ -3,7 +3,7 @@ package net.dbsgameplay.core.constants;
 /**
  * Enthält die Pfade zu den Konfigurationsdateien des PaperCore-Plugins.
  */
-public final class PCFilePaths {
+public final class FilePaths {
 
     /**
      * Der Name des Plugin-Ordners des PaperCore-Plugins.

@@ -3,10 +3,13 @@ package net.dbsgameplay.core;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import net.dbsgameplay.core.interfaces.IConfigHandler;
+import net.dbsgameplay.core.utils.Helpers;
 import org.bukkit.Bukkit;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 /**
@@ -28,6 +31,18 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
     public ConfigHandler(File file, Class<T> type) {
         this.file = file;
         this.type = type;
+        createFoldersIfNotExists(file.getParentFile());
+    }
+
+    /**
+     * Erstellt Ordner zu der angegebenen Datei, falls diese nicht existieren.
+     */
+    private void createFoldersIfNotExists(File folder) {
+        if (!folder.exists()) {
+            if (!folder.mkdirs()) {
+                throw new IllegalStateException("Konnte den Ordner nicht erstellen: " + folder.getAbsolutePath());
+            }
+        }
     }
 
     /**
@@ -40,7 +55,10 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
         try {
             if (!file.exists()) {
                 if (file.createNewFile()) {
-                    T instance = type.newInstance();
+                    T instance = type.getDeclaredConstructor().newInstance();
+
+                    this.configModel = Helpers.createWithDefaultValues(type);
+
                     saveConfig();
                     Bukkit.getLogger().info("Die Konfigurationsdatei \"" + file.getName() + "\" wurde erstellt.");
                 }
@@ -50,6 +68,8 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
 
         } catch (IOException | IllegalAccessException | InstantiationException e) {
             Bukkit.getLogger().severe("Fehler beim Laden der Konfigurationsdatei \"" + file.getName() + "\"." + file.getName() + "\n" + e.getMessage() + Arrays.toString(e.getStackTrace()));
+        } catch (InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -100,5 +120,9 @@ public class ConfigHandler<T> implements IConfigHandler<T> {
         }
 
         return configModel;
+    }
+
+    public File getFile() {
+        return file;
     }
 }

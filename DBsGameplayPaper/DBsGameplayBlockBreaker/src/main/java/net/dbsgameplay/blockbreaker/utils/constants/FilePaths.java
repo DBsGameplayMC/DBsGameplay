@@ -16,6 +16,12 @@ public final class FilePaths {
     public static final String RESOURCE_GROUPS_CONFIG = PLUGIN_FOLDER + "/ResourceGroups.yml";
 
     /**
+     * Der Pfad zur Konfigurationsdatei der Datenbank.
+     */
+    public static final String DATABASE_CONFIG = PLUGIN_FOLDER + "/DatabaseConfig.yml";
+
+
+    /**
      * Der Pfad zum Ordner in dem die Konfigurationsdateien der ResourceAreas gespeichert werden.
      */
     public static final String RESOURCE_AREAS_FOLDER = PLUGIN_FOLDER + "/ResourceAreas";

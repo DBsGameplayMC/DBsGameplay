@@ -5,12 +5,10 @@ import net.dbsgameplay.blockbreaker.commands.admin.CmdBlockBreaker;
 import net.dbsgameplay.blockbreaker.commands.admin.CmdTest;
 import net.dbsgameplay.blockbreaker.commands.controlling.interfaces.IBBCommand;
 import net.dbsgameplay.blockbreaker.utils.BasePlayer;
-import net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes;
 import net.dbsgameplay.blockbreaker.utils.constants.FilePaths;
-import net.dbsgameplay.blockbreaker.utils.models.MdlResourceGroupConfig;
+import net.dbsgameplay.blockbreaker.utils.configmodels.MdlResourceGroupConfig;
 import net.dbsgameplay.core.ConfigHandler;
-import net.dbsgameplay.core.constants.PCChatPrefixes;
-import org.bukkit.ChatColor;
+import net.dbsgameplay.core.constants.ChatPrefixes;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -36,7 +34,7 @@ public class CommandController implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
         if (!(sender instanceof Player)) {
-            this.plugin.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "Dieser Befehl ist nur für §6Spieler §7verfügbar!");
+            this.plugin.getServer().getConsoleSender().sendMessage(net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes.PREFIX + "Dieser Befehl ist nur für §6Spieler §7verfügbar!");
             return false;
         }
 
@@ -73,20 +71,20 @@ public class CommandController implements CommandExecutor {
      */
     private <T extends IBBCommand> void registerCommand(T commandToRegister) {
         if (commandToRegister.getName() == null || commandToRegister.getName().isBlank()) {
-            this.plugin.getServer().getConsoleSender().sendMessage(PCChatPrefixes.ERROR + "Die Befehlsklasse §3" + commandToRegister.getClass().getSimpleName() + " §7hat §ckeinen §7gültigen §cBefehlsnamen §7definiert!");
+            this.plugin.getServer().getConsoleSender().sendMessage(ChatPrefixes.ERROR + "Die Befehlsklasse §3" + commandToRegister.getClass().getSimpleName() + " §7hat §ckeinen §7gültigen §cBefehlsnamen §7definiert!");
             return;
         }
 
         PluginCommand pluginCommand = this.plugin.getCommand(commandToRegister.getName());
 
         if (pluginCommand == null) {
-            this.plugin.getServer().getConsoleSender().sendMessage(PCChatPrefixes.ERROR + "Der Befehl \"§3/" + commandToRegister.getName() + "§7\" konnte $cnicht §7registriert werden!");
+            this.plugin.getServer().getConsoleSender().sendMessage(ChatPrefixes.ERROR + "Der Befehl \"§3/" + commandToRegister.getName() + "§7\" konnte $cnicht §7registriert werden!");
             return;
         }
 
         pluginCommand.setExecutor(this);
 
-        this.plugin.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "Der Befehl \"§3" + commandToRegister.getName() + "§7\" wurde §aerfolgreich §7registriert!");
+        this.plugin.getServer().getConsoleSender().sendMessage(net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes.PREFIX + "Der Befehl \"§3" + commandToRegister.getName() + "§7\" wurde §aerfolgreich §7registriert!");
     }
     //endregion
 }
