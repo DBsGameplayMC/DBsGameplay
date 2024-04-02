@@ -1,7 +1,8 @@
 package net.dbsgameplay.core.database;
 
 import com.google.common.reflect.ClassPath;
-import net.dbsgameplay.core.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.interfaces.IDatabaseProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -43,7 +44,7 @@ public class DatabaseFactory<T extends JavaPlugin> implements IDatabaseProvider 
         properties.setProperty(Environment.AUTOCOMMIT, "true");
         properties.setProperty(Environment.AUTO_CLOSE_SESSION, "true");
         properties.setProperty(Environment.HBM2DDL_AUTO, "update");
-
+        System.out.println("UserName: " + this.databaseConfiguration.getUsername());
         properties.setProperty(Environment.JAKARTA_JDBC_USER, this.databaseConfiguration.getUsername());
         properties.setProperty(Environment.JAKARTA_JDBC_PASSWORD, this.databaseConfiguration.getPassword());
 

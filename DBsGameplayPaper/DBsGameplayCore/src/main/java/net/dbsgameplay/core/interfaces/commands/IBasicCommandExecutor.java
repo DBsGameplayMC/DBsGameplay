@@ -1,13 +1,13 @@
-package net.dbsgameplay.blockbreaker.commands.controlling.interfaces;
+package net.dbsgameplay.core.interfaces.commands;
 
-import net.dbsgameplay.blockbreaker.utils.BasePlayer;
+import net.dbsgameplay.core.players.CorePlayer;
 import org.bukkit.command.Command;
 
-public interface IBasicCommandExecutor extends IBBCommand {
+public interface IBasicCommandExecutor<BasePlayer extends CorePlayer> extends IDBSGCommand {
     /**
      * Funktion, um einen BlockBreaker-Befehl auszuführen
      *
-     * @param basePlayer Instanz des BBPlayers
+     * @param basePlayer Instanz der BasePlayer-Klasse
      * @param command    Der Befehl
      * @param arguments  Argumente des Befehls
      */

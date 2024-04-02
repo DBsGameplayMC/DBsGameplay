@@ -1,18 +1,25 @@
-package net.dbsgameplay.core;
+package net.dbsgameplay.core.players;
 
+import net.dbsgameplay.core.DBsGameplayCore;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.constants.Permissions;
+import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Klasse, die ein org.bukkit.entity.Player-Objekt um zusätzliche Funktionen erweitert und für die Verwendung in den DBsGameplay-Plugins vorgesehen ist.
+ */
 public class CorePlayer {
 
     private final Player player;
+    private String language;
 
     public CorePlayer(Player player) {
         this.player = player;
@@ -52,19 +59,57 @@ public class CorePlayer {
         return this.player;
     }
 
+    /**
+     * Gibt die UUID des Spielers zurück.
+     */
+    public UUID getUniqueId() {
+        return this.player.getUniqueId();
+    }
+
+    /**
+     * Gibt den Sprach-Code des Spielers zurück.
+     */
+    public String getLanguage() {
+        return language;
+    }
+
+    /**
+     * Gibt die Sprache des Spielers in einem menschenfreundlichen Format zurück.
+     */
+    public String getLanguageHumanFriendly() {
+        return switch (language) {
+            case "de" -> "Deutsch";
+            case "en" -> "English";
+            default -> "UNKNOWN";
+        };
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public void saveLanguage() {
+        NetworkPlayerDao networkPlayerDao = DBsGameplayCore.getInstance().getNetworkPlayerDao();
+        networkPlayerDao.updateLanguage(this.getUniqueId().toString(), this.language);
+    }
+
     // #region Message-Funktionen
     /**
      * Sendet eine Nachricht mit dem ChatPrefixes.NETWORK_PREFIX-Prefix an den Spieler.
      */
-    public void sendCoreMessage(String messageToSend) {
+    public void sendNetworkMessage(String messageToSend) {
         player.sendMessage(ChatPrefixes.NETWORK_PREFIX + messageToSend);
+    }
+
+    public void sendDatabaseMessage(String messageToSend) {
+        player.sendMessage(ChatPrefixes.DATABASE_PREFIX + messageToSend);
     }
 
     /**
      * Sendet eine Nachricht mit dem ChatPrefixes.ARROWS-Prefix an den Spieler.
      */
     public void sendArrowMessage(String messageToSend) {
-        player.sendMessage(ChatPrefixes.ARROWS + messageToSend);
+        player.sendMessage(ChatPrefixes.ARROWS_POINTING_RIGHT + messageToSend);
     }
 
     /**

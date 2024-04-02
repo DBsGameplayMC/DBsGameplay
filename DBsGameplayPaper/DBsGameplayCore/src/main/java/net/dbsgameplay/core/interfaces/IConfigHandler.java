@@ -1,7 +1,7 @@
 package net.dbsgameplay.core.interfaces;
 
-public interface IConfigHandler<T> {
+public interface IConfigHandler<ConfigModel> {
     void saveConfig();
-    void saveConfig(T configModel);
+    void saveConfig(ConfigModel configModel);
     void loadConfig();
 }

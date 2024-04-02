@@ -1,5 +1,7 @@
 package net.dbsgameplay.blockbreaker.utils.constants;
 
+import static net.dbsgameplay.core.constants.ChatPrefixes.applyPrefixTemplate;
+
 /**
  * Enthält die Chat-Präfixe des BlockBreakers.
  */
@@ -10,5 +12,5 @@ public class ChatPrefixes {
     /**
     * Präfix des BlockBreakers.
     */
-    public static final String PREFIX = "§8[" + PREFIX_RGB + "§8] §7";
+    public static final String PREFIX = applyPrefixTemplate(PREFIX_RGB);
 }

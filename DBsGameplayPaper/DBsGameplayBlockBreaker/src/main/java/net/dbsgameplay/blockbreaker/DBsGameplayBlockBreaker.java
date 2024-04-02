@@ -4,13 +4,13 @@ import net.dbsgameplay.blockbreaker.commands.HelpCommand;
 import net.dbsgameplay.blockbreaker.commands.MinesCommand;
 import net.dbsgameplay.blockbreaker.commands.SellCommand;
 import net.dbsgameplay.blockbreaker.commands.UpgradeCommand;
-import net.dbsgameplay.blockbreaker.commands.controlling.CommandController;
+import net.dbsgameplay.blockbreaker.controllers.CommandController;
 import net.dbsgameplay.blockbreaker.listener.*;
 import net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes;
 import net.dbsgameplay.blockbreaker.utils.constants.FilePaths;
-import net.dbsgameplay.blockbreaker.utils.database.daos.BBPlayerDao;
-import net.dbsgameplay.core.ConfigHandler;
-import net.dbsgameplay.core.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
+import net.dbsgameplay.core.utils.ConfigHandler;
+import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -21,13 +21,14 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 public final class DBsGameplayBlockBreaker extends JavaPlugin {
-    private final Logger logger = Logger.getLogger(DBsGameplayBlockBreaker.class.getName());
 
+    private final Logger logger = Logger.getLogger(DBsGameplayBlockBreaker.class.getName());
     private CommandController commandController;
-    private BBPlayerDao bbPlayerDao;
+    private NetworkPlayerDao networkPlayerDao;
 
     public void onEnable() {
         this.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "Initialisiere DBsGameplay's " + ChatPrefixes.PREFIX_RGB + "§7...");
+
         this.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "Verbinde mit Datenbank...");
 
         ConfigHandler<MdlDatabaseConfig> databaseConfigConfigHandler = new ConfigHandler<>(new File(FilePaths.DATABASE_CONFIG), MdlDatabaseConfig.class);
@@ -50,9 +51,6 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
             return;
         }
 
-        this.bbPlayerDao = new BBPlayerDao(this, databaseConfig);
-
-
         this.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "Registriere Befehle...");
         this.commandController = new CommandController(this);
 
@@ -69,10 +67,11 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
         getServer().getPluginManager().registerEvents((Listener) new InstantInvListener(), (Plugin) this);
         getServer().getPluginManager().registerEvents((Listener) new PickaxeUpgradeListener(), (Plugin) this);
         getServer().getPluginManager().registerEvents((Listener) new MineListener(), (Plugin) this);
+
+        this.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "DBsGameplay's " + ChatPrefixes.PREFIX_RGB + "§7wurde erfolgreich initialisiert!");
     }
 
-    public BBPlayerDao getBBPlayerDao() {
-        return this.bbPlayerDao;
+    public NetworkPlayerDao getBBPlayerDao() {
+        return this.networkPlayerDao;
     }
-
 }

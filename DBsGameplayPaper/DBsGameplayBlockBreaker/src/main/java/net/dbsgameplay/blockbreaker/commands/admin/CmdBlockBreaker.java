@@ -1,23 +1,34 @@
 package net.dbsgameplay.blockbreaker.commands.admin;
 
 import net.dbsgameplay.blockbreaker.DBsGameplayBlockBreaker;
-import net.dbsgameplay.blockbreaker.commands.controlling.interfaces.IConfigCommandExecutor;
 import net.dbsgameplay.blockbreaker.utils.BasePlayer;
+import net.dbsgameplay.blockbreaker.utils.constants.FilePaths;
 import net.dbsgameplay.blockbreaker.utils.constants.Permissions;
 import net.dbsgameplay.blockbreaker.utils.enums.ResourceGroupType;
 import net.dbsgameplay.blockbreaker.utils.configmodels.MdlResourceGroupConfig;
-import net.dbsgameplay.core.ConfigHandler;
+import net.dbsgameplay.core.interfaces.commands.IPluginCommandExecutor;
+import net.dbsgameplay.core.utils.ConfigHandler;
 import org.bukkit.command.Command;
 
-public class CmdBlockBreaker implements IConfigCommandExecutor<MdlResourceGroupConfig> {
+import java.io.File;
 
-    public static final String NAME = "blockbreaker";
+public class CmdBlockBreaker implements IPluginCommandExecutor<BasePlayer, DBsGameplayBlockBreaker> {
+
+    private final ConfigHandler<MdlResourceGroupConfig> resouceGroupConfig;
+    private static final String NAME = "blockbreaker";
+
+    public CmdBlockBreaker() {
+        this.resouceGroupConfig = new ConfigHandler<>(new File(FilePaths.RESOURCE_GROUPS_CONFIG), MdlResourceGroupConfig.class);
+
+
+    }
 
     @Override
-    public Boolean onCommand(BasePlayer basePlayer, Command command, String[] arguments, DBsGameplayBlockBreaker plugin, ConfigHandler<MdlResourceGroupConfig> resouceGroupConfig) {
+    public Boolean onCommand(BasePlayer basePlayer, Command command, String[] arguments, DBsGameplayBlockBreaker plugin) {
 
         if (!basePlayer.hasPermission(Permissions.BLOCKBREAKER_CMD_PERM)) return false;
 
+        // Eingabe /blockbreaker (Hilfe)
         if (arguments.length == 0) {
             basePlayer.sendErrorMessage("Fehlende Argumente für den Befehl §b/BlockBreaker§7.");
             basePlayer.sendArrowMessage("Verfügbare Argumente für den Befehl §8/§bBlockBreaker§7:");
@@ -28,6 +39,7 @@ public class CmdBlockBreaker implements IConfigCommandExecutor<MdlResourceGroupC
         }
 
         // region Argument "Define"
+        // Eingabe /blockbreaker define
         if (arguments[0].equalsIgnoreCase("define")) {
 
             if (arguments.length == 1) {
@@ -36,6 +48,7 @@ public class CmdBlockBreaker implements IConfigCommandExecutor<MdlResourceGroupC
                 return false;
             }
             // region Argument "Group"
+            // Eingabe /blockbreaker define group
             if (arguments[1].equalsIgnoreCase("group")) {
                 if (arguments.length < 6) {
                     basePlayer.sendErrorMessage("Fehlende Argumente für den Befehl §b/BlockBreaker Define§7.");
@@ -129,4 +142,5 @@ public class CmdBlockBreaker implements IConfigCommandExecutor<MdlResourceGroupC
     public String getName() {
         return NAME;
     }
+
 }

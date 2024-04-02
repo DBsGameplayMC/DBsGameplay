@@ -19,18 +19,6 @@ public class PlayerJoinLeaveListener implements Listener {
     }
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
-        event.setJoinMessage(ChatColor.GREEN + "[+] " + ChatColor.WHITE + event.getPlayer().getName());
-        Player player = event.getPlayer();
-
-        plugin.getBBPlayerDao().findByUUID(player.getUniqueId().toString()).ifPresent(bbPlayer -> {
-            player.sendMessage("Deine Sprache: " + bbPlayer.getLanguage());
-        });
-
-        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 2147483647, 0, true, false));
-    }
-
-    @EventHandler
     public void onLeft(PlayerQuitEvent event) {
         event.setQuitMessage(ChatColor.RED + "[-] " + ChatColor.WHITE + event.getPlayer().getName());
         Player player = event.getPlayer();

@@ -1,4 +1,4 @@
-package net.dbsgameplay.core.database;
+package net.dbsgameplay.core.interfaces;
 
 import org.hibernate.SessionFactory;
 import org.jetbrains.annotations.Nullable;

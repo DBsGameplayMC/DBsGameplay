@@ -1,4 +1,4 @@
-package net.dbsgameplay.core.configmodels;
+package net.dbsgameplay.core.utils.configmodels;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,7 +23,6 @@ public class MdlDatabaseConfig {
         this.showSqlInConsole = showSqlInConsole;
         this.databaseEntitiesPackage = databaseEntitiesPackage;
     }
-
 
     public String getHost() {
         return this.host;

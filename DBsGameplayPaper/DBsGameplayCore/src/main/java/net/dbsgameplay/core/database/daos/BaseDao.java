@@ -1,7 +1,9 @@
 package net.dbsgameplay.core.database.daos;
 
 
-import net.dbsgameplay.core.configmodels.MdlDatabaseConfig;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
 import net.dbsgameplay.core.database.DatabaseFactory;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.FlushMode;
@@ -11,7 +13,6 @@ import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +36,7 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
 
     /**
      * Speichert die gegebene Entität in der Datenbank.
+     *
      * @param data
      */
     public void persistEntity(final T data) {
@@ -59,7 +61,7 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
         if (sessionFactory == null)
             return null;
 
-        if (this.session == null)
+        if (this.session == null || !this.session.isOpen())
             this.session = sessionFactory.withOptions().flushMode(FlushMode.AUTO).openSession();
 
         return !this.session.isOpen() ? this.getSessionFactory().withOptions().flushMode(FlushMode.AUTO).openSession() : this.session;
@@ -97,6 +99,15 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
      */
     protected abstract Class<T> getClazzType();
 
+    /**
+     * Gibt den CriteriaBuilder zurück, der für die Erstellung von Queries verwendet wird.
+     */
+    protected abstract CriteriaBuilder getCriteriaBuilder();
+
+    /**
+     * Gibt die CriteriaQuery zurück, die für die Erstellung von Queries verwendet wird.
+     */
+    protected abstract CriteriaQuery<T> getCriteriaQuery();
 
     /**
      * Gibt die SessionFactory zurück, die für die Datenbankverbindung verwendet wird.
