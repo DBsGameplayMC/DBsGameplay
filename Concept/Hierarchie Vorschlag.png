@@ -1,0 +1,188 @@
+<mxfile host="app.diagrams.net" modified="2024-04-12T17:05:39.812Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="I2hzQeCESmGBugz3Pjsi" version="24.2.3" type="onedrive">
+  <diagram name="Page-1" id="mgBTAUYbAejSE59uISFI">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-1" value="&lt;font color=&quot;#ffffff&quot;&gt;Inhaber&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CC0000;" vertex="1" parent="1">
+          <mxGeometry x="240" y="200" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-2" value="&lt;font color=&quot;#ffffff&quot;&gt;Administrator&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF0000;strokeColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="480" y="200" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-3" value="Bereich:&lt;br&gt;Development" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66B2FF;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="400" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-4" value="Bereich:&lt;div&gt;Building&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=default;fillColor=#00cc00;" vertex="1" parent="1">
+          <mxGeometry x="360" y="400" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-5" target="HtsiX8cZ_4FLzc_AFCRa-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-5" value="Bereich:&lt;div&gt;Moderation&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCCC00;" vertex="1" parent="1">
+          <mxGeometry x="980" y="400" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-6" value="Supporter" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#33FF33;" vertex="1" parent="1">
+          <mxGeometry x="980" y="720" width="120" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-7" value="Test-Builder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00CC00;" vertex="1" parent="1">
+          <mxGeometry x="363" y="720" width="125" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-8" target="HtsiX8cZ_4FLzc_AFCRa-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-8" value="Test-Developer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66B2FF;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="720" width="120" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-10" target="HtsiX8cZ_4FLzc_AFCRa-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-10" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Builder&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00CC00;" vertex="1" parent="1">
+          <mxGeometry x="363" y="560" width="125" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-11" target="HtsiX8cZ_4FLzc_AFCRa-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-11" value="Moderator" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FF9933;" vertex="1" parent="1">
+          <mxGeometry x="980" y="560" width="120" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-12" target="HtsiX8cZ_4FLzc_AFCRa-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-12" value="Developer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66B2FF;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="560" width="120" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-15" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Techniker&lt;/span&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007FFF;" vertex="1" parent="1">
+          <mxGeometry x="-20" y="880" width="120" height="79" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-17" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;- Roadmap&lt;/div&gt;&lt;div&gt;- Team-Leitung&lt;/div&gt;&lt;div&gt;- Absprache mit allen Bereichen&lt;/div&gt;&lt;div&gt;- Kennen alles vom Server&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="315" y="50" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-19" value="" style="endArrow=none;html=1;rounded=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-1" target="HtsiX8cZ_4FLzc_AFCRa-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="170" as="sourcePoint" />
+            <mxPoint x="360" y="150" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-20" value="" style="endArrow=none;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.655;entryY=0.983;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-2" target="HtsiX8cZ_4FLzc_AFCRa-17">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="210" as="sourcePoint" />
+            <mxPoint x="460" y="160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-21" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-1" target="HtsiX8cZ_4FLzc_AFCRa-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="310" y="300" as="sourcePoint" />
+            <mxPoint x="360" y="250" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="340" />
+              <mxPoint x="40" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-22" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="HtsiX8cZ_4FLzc_AFCRa-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="280" as="sourcePoint" />
+            <mxPoint x="190" y="410" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="340" />
+              <mxPoint x="420" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-23" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="HtsiX8cZ_4FLzc_AFCRa-5">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="280" as="sourcePoint" />
+            <mxPoint x="660" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="540" y="340" />
+              <mxPoint x="1040" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-24" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="280" as="sourcePoint" />
+            <mxPoint x="420" y="400" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="540" y="340" />
+              <mxPoint x="420" y="340" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-26" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;- Umsetzung, Wartung und Verbesserung von&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;Entwicklungsprojekten&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- Konzeptionierung&lt;/div&gt;&lt;div&gt;- Absprache mit Bereich Building&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="529.5" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-27" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;- Umsetzung und Wartung/Verbesserung von Bauprojekten&lt;/div&gt;&lt;div&gt;- Absprache mit Bereich Development&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="529.5" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-28" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;- Durchsetzen von Regeln&lt;br&gt;&lt;/div&gt;&lt;div&gt;- Durchsetzen von Bestrafungen&lt;/div&gt;&lt;div&gt;- Bearbeitung von Entbannungsanträgen&lt;/div&gt;&lt;div&gt;- Bearbeitung von Bewerbungen&lt;/div&gt;&lt;div&gt;- Schreiben von FAQ und beantworten von Feedback&lt;/div&gt;&lt;div&gt;- Kennen alles vom Server&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="740" y="529.5" width="220" height="160.5" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-29" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-12" target="HtsiX8cZ_4FLzc_AFCRa-26">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="485" as="sourcePoint" />
+            <mxPoint x="180" y="455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-34" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-3" target="HtsiX8cZ_4FLzc_AFCRa-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="670" as="sourcePoint" />
+            <mxPoint x="590" y="620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-35" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-10" target="HtsiX8cZ_4FLzc_AFCRa-27">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="610" as="sourcePoint" />
+            <mxPoint x="520" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-36" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- Umsetzung, Wartung und Verbesserung von&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Entwicklungsprojekten&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- Absprache mit Bereich Building&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- Einarbeitung in die Serverstrukuren und -konzepte&lt;/div&gt;&lt;div&gt;- Absprache mit Developern&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="689.5" width="220" height="150.5" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-37" value="" style="endArrow=none;html=1;rounded=0;entryX=0.001;entryY=0.471;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-8" target="HtsiX8cZ_4FLzc_AFCRa-36">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="770" as="sourcePoint" />
+            <mxPoint x="140" y="751" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-38" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;-&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;Umsetzung und Wartung/Verbesserung von Bauprojekten&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;- Absprache mit Bereich Development&lt;/span&gt;&lt;/div&gt;&lt;div&gt;- Einarbeitung in die Serverstrukuren und -konzepte&lt;/div&gt;&lt;div&gt;- Absprache mit Buildern&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="510" y="689.5" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-39" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-7" target="HtsiX8cZ_4FLzc_AFCRa-38">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="540" y="760" as="sourcePoint" />
+            <mxPoint x="580" y="751" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-40" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;&lt;div&gt;- Übersetzungen, Discord einstellen, Bot/Plugin Konfigurationen&lt;/div&gt;&lt;div&gt;- Absprache mit Developern&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="120" y="849.5" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-41" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-15" target="HtsiX8cZ_4FLzc_AFCRa-40">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="110" y="920" as="sourcePoint" />
+            <mxPoint x="150" y="911" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-42" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Aufgabenbereiche&lt;/h1&gt;&lt;div&gt;- Bearbeitung von Tickets&lt;/div&gt;&lt;div&gt;- Aufnehmen von Bewerbern (GDocs Formular ausfüllen während Erstgespräch)&lt;/div&gt;&lt;div&gt;- Spieler unterhalten und unterstützen&lt;/div&gt;&lt;div&gt;- Kennen alles vom Server&lt;/div&gt;&lt;div&gt;- Zuständig für&amp;nbsp;Harmonie auf dem Server&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="740" y="689.5" width="220" height="170.5" as="geometry" />
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-44" value="" style="endArrow=none;html=1;rounded=0;entryX=0.991;entryY=0.421;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryPerimeter=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-6" target="HtsiX8cZ_4FLzc_AFCRa-42">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="970" y="840" as="sourcePoint" />
+            <mxPoint x="990" y="840" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-45" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-28" target="HtsiX8cZ_4FLzc_AFCRa-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="980" y="639" as="sourcePoint" />
+            <mxPoint x="1000" y="639" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="HtsiX8cZ_4FLzc_AFCRa-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.459;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="HtsiX8cZ_4FLzc_AFCRa-4" target="HtsiX8cZ_4FLzc_AFCRa-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
