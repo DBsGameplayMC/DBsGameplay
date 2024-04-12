@@ -71,7 +71,7 @@ public final class DBsGameplayBlockBreaker extends JavaPlugin {
         this.getServer().getConsoleSender().sendMessage(ChatPrefixes.PREFIX + "DBsGameplay's " + ChatPrefixes.PREFIX_RGB + "§7wurde erfolgreich initialisiert!");
     }
 
-    public NetworkPlayerDao getBBPlayerDao() {
+    public NetworkPlayerDao getNetworkPlayerDao() {
         return this.networkPlayerDao;
     }
 }

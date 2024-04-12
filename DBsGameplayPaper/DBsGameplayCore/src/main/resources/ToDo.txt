@@ -1,0 +1,15 @@
+Base-Commands:
+- fly
+- gms
+- gma
+- gmc
+- gmsp
+- warp
+- rain
+- sun
+- clear
+- thunder
+- zufall
+- auth
+- (set) spawn
+-

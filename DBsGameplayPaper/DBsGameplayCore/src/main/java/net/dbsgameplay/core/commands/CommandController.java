@@ -1,10 +1,10 @@
-package net.dbsgameplay.blockbreaker.controllers;
+package net.dbsgameplay.core.commands;
 
-import net.dbsgameplay.blockbreaker.DBsGameplayBlockBreaker;
-import net.dbsgameplay.blockbreaker.commands.admin.CmdBlockBreaker;
-import net.dbsgameplay.core.interfaces.commands.IDBSGCommand;
-import net.dbsgameplay.blockbreaker.utils.BasePlayer;
+import net.dbsgameplay.core.DBsGameplayCore;
+import net.dbsgameplay.core.commands.team.Fly;
 import net.dbsgameplay.core.constants.ChatPrefixes;
+import net.dbsgameplay.core.interfaces.commands.IDBSGCommand;
+import net.dbsgameplay.core.players.CorePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,10 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class CommandController implements CommandExecutor {
 
-    private final DBsGameplayBlockBreaker plugin;
-    private CmdBlockBreaker cmdBlockBreaker;
+    private final DBsGameplayCore plugin;
+    private Fly cmdFly;
 
-    public CommandController(DBsGameplayBlockBreaker plugin) {
+    public CommandController(DBsGameplayCore plugin) {
         this.plugin = plugin;
         this.registerCommands();
     }
@@ -25,30 +25,28 @@ public class CommandController implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if (!(sender instanceof Player)) {
-            this.plugin.getServer().getConsoleSender().sendMessage(net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes.PREFIX + "Dieser Befehl ist nur für §6Spieler §7verfügbar!");
+        if (!(sender instanceof Player player)) {
+            this.plugin.getServer().getConsoleSender().sendMessage(ChatPrefixes.NETWORK_PREFIX + "Dieser Befehl ist nur für §6Spieler §7verfügbar!");
             return false;
         }
 
-        Player player = (Player) sender;
-        BasePlayer basePlayer = new BasePlayer(player, this.plugin.getNetworkPlayerDao());
+        CorePlayer corePlayer = plugin.getPlayerHandler().getPlayer(player.getUniqueId());
         String commandName = command.getName();
 
-        if(commandName.equalsIgnoreCase(this.cmdBlockBreaker.getName())) {
-            return this.cmdBlockBreaker.onCommand(basePlayer, command, args, this.plugin);
+        if(commandName.equalsIgnoreCase(this.cmdFly.getName())) {
+            return this.cmdFly.onCommand(corePlayer, command, args, this.plugin);
         }
 
         return false;
     }
-
     //region Private Methoden
     /**
      * Registriert alle Befehle
      */
     private void registerCommands() {
         // /BlockBreaker
-        this.cmdBlockBreaker = new CmdBlockBreaker();
-        this.registerCommand(this.cmdBlockBreaker);
+        this.cmdFly = new Fly();
+        this.registerCommand(this.cmdFly);
     }
 
     /**
@@ -72,7 +70,6 @@ public class CommandController implements CommandExecutor {
 
         pluginCommand.setExecutor(this);
 
-        this.plugin.getServer().getConsoleSender().sendMessage(net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes.PREFIX + "Der Befehl \"§3" + commandToRegister.getName() + "§7\" wurde §aerfolgreich §7registriert!");
+        this.plugin.getServer().getConsoleSender().sendMessage(ChatPrefixes.INFO + "Der Befehl \"§3" + commandToRegister.getName() + "§7\" wurde §aerfolgreich §7registriert!");
     }
-    //endregion
 }

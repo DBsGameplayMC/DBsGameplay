@@ -1,14 +1,14 @@
 plugins {
-        id("com.github.johnrengelman.shadow") version "8.1.1"
-        id("java")
-        id("application")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("java")
+    id("application")
 }
 
 application {
-    mainClass.set("net.dbsgameplay.blockbreaker.DBsGameplayBlockBreaker")
+    mainClass.set("net.dbsgameplay.survival.DBsGameplaySurvival")
 }
 
-group = "net.dbsgameplay.blockbreaker"
+group = "net.dbsgameplay.survival"
 version = "1.0-SNAPSHOT"
 
 repositories {

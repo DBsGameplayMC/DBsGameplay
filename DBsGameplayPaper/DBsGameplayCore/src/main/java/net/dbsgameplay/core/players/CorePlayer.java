@@ -1,15 +1,17 @@
 package net.dbsgameplay.core.players;
 
-import net.dbsgameplay.core.DBsGameplayCore;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.constants.Permissions;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
+import net.dbsgameplay.core.database.entities.NetworkPlayer;
+import net.dbsgameplay.core.enums.Locale;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,14 +21,56 @@ import java.util.UUID;
 public class CorePlayer {
 
     private final Player player;
-    private String language;
+    private final NetworkPlayerDao networkPlayerDao;
 
-    public CorePlayer(Player player) {
+    // #region Eigenschaften
+    private Locale locale;
+    // #endregion Eigenschaften
+
+
+    // #region Constructors
+    public CorePlayer(Player player, NetworkPlayerDao networkPlayerDao) {
         this.player = player;
+        this.networkPlayerDao = networkPlayerDao;
+
+        this.init();
     }
 
-    public CorePlayer(UUID playerUUID) {
+    public CorePlayer(UUID playerUUID, NetworkPlayerDao networkPlayerDao) {
         this.player = Bukkit.getServer().getPlayer(playerUUID);
+        this.networkPlayerDao = networkPlayerDao;
+
+        this.init();
+    }
+    // #endregion
+
+
+    /**
+     * Initialisiert den CorePlayer.
+     */
+    private void init() {
+        Optional<Boolean> playerExistsOpt = this.networkPlayerDao.isPlayerRegistered(this.player.getUniqueId().toString());
+        System.out.println("playerExistsOpt empty? " + playerExistsOpt.isEmpty());
+
+        if (playerExistsOpt.isEmpty()) {
+            this.player.kickPlayer(ChatPrefixes.NETWORK_PREFIX + "Ein §cFehler §7ist aufgetreten, während wir deine Spieler-Daten geladen haben. Die Datenbank scheint nicht erreichbar zu sein. \n\n §bSollte das Problem weiterhin bestehen, öffne bitte ein Ticket auf unserem Discord!.");
+            return;
+        }
+
+        if (!playerExistsOpt.get()) {
+            this.networkPlayerDao.registerPlayer(new NetworkPlayer(this));
+            System.out.println("Player was registered");
+        }
+
+        Optional<NetworkPlayer> networkPlayer = getNetworkPlayer();
+
+        if (networkPlayer.isEmpty()) {
+            this.player.kickPlayer(ChatPrefixes.NETWORK_PREFIX + "Ein §cFehler §7ist aufgetreten, während wir deine Spieler-Daten geladen haben. Bitte versuche es erneut. \n\n §bSollte das Problem weiterhin bestehen, öffne bitte ein Ticket auf unserem Discord!.");
+            return;
+        }
+
+        // Setze Eigenschaften
+        this.locale = Locale.fromLocaleCode(networkPlayer.get().getLanguage());
     }
 
     /**
@@ -52,6 +96,8 @@ public class CorePlayer {
         return false;
     }
 
+
+
     /**
      * Gibt das org.bukkit.entity.Player-Objekt des CorePlayers zurück.
      */
@@ -66,32 +112,42 @@ public class CorePlayer {
         return this.player.getUniqueId();
     }
 
+
+
+    // # region Sprache
     /**
      * Gibt den Sprach-Code des Spielers zurück.
      */
-    public String getLanguage() {
-        return language;
+    public Locale getLocale() {
+        return locale;
     }
 
     /**
      * Gibt die Sprache des Spielers in einem menschenfreundlichen Format zurück.
      */
     public String getLanguageHumanFriendly() {
-        return switch (language) {
-            case "de" -> "Deutsch";
-            case "en" -> "English";
+        return switch (locale) {
+            case GERMAN -> "Deutsch";
+            case ENGLISH -> "English";
             default -> "UNKNOWN";
         };
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+    public void setLocale(Locale locale) {
+        Locale tmpLocale = this.locale;
+        this.locale = locale;
 
-    public void saveLanguage() {
-        NetworkPlayerDao networkPlayerDao = DBsGameplayCore.getInstance().getNetworkPlayerDao();
-        networkPlayerDao.updateLanguage(this.getUniqueId().toString(), this.language);
+        if (!saveLanguage()) {
+            sendErrorMessage("Deine Sprache konnte nicht gespeichert werden. Bitte versuche es erneut.");
+            this.locale = tmpLocale;
+            sendInfoMessage("Deine Sprache wurde auf " + getLanguageHumanFriendly() + " zurückgesetzt.");
+            return;
+        }
+
     }
+    // #endregion Sprache
+
+
 
     // #region Message-Funktionen
     /**
@@ -134,5 +190,19 @@ public class CorePlayer {
     }
     // #endregion Message-Funktionen
 
+
+
+    // #region Datenbankfunktionen
+    private Optional<NetworkPlayer> getNetworkPlayer() {
+        return this.networkPlayerDao.getPlayer(this.player.getUniqueId().toString());
+    }
+
+    /**
+     * Speichert die Sprache des Spielers in der Datenbank.
+     */
+    private Boolean saveLanguage() {
+        return this.networkPlayerDao.updateLanguage(this.getUniqueId().toString(), this.locale.getLocale());
+    }
+    // #endregion Datenbankfunktionen
 
 }

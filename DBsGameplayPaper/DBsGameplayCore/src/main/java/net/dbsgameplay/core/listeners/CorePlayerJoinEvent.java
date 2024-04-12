@@ -22,29 +22,15 @@ public class CorePlayerJoinEvent implements Listener {
 
     @EventHandler
     public void onCorePlayerJoin(PlayerJoinEvent event) {
-        event.setJoinMessage("§8[§a+§8] §7" + event.getPlayer().getName());
 
-        Player player = event.getPlayer();
-        CorePlayer corePlayer = new CorePlayer(player);
-        boolean playerExists = plugin.getNetworkPlayerDao().isPlayerRegistered(player.getUniqueId().toString());
+        CorePlayer corePlayer = new CorePlayer(event.getPlayer(), plugin.getNetworkPlayerDao());
+        this.plugin.getPlayerHandler().addPlayer(corePlayer);
 
-        if (!playerExists) {
-            plugin.getNetworkPlayerDao().registerPlayer(new NetworkPlayer(corePlayer));
-        }
 
-        Optional<NetworkPlayer> networkPlayer = plugin.getNetworkPlayerDao().getPlayer(player.getUniqueId().toString());
-
-        if (networkPlayer.isEmpty()) {
-            player.kickPlayer(ChatPrefixes.NETWORK_PREFIX + "Ein §cFehler §7ist aufgetreten, während wir deine Spieler-Daten geladen haben. Bitte versuche es erneut. \n\n §bSollte das Problem weiterhin bestehen, öffne bitte ein Ticket auf unserem Discord!.");
-            return;
-        }
-
-        corePlayer.setLanguage(networkPlayer.get().getLanguage());
-
-        plugin.getPlayerHandler().addPlayer(corePlayer);
-
-        corePlayer.sendNetworkMessage("§7Willkommen auf " + ChatPrefixes.PREFIX_RGB + "§7, §6" + player.getName() + "§7!");
+        corePlayer.sendNetworkMessage("§7Willkommen auf " + ChatPrefixes.PREFIX_RGB + "§7, §6" + corePlayer.getPlayer().getName() + "§7!");
         corePlayer.sendDatabaseMessage("Alle Spieler-Daten wurden §aerfolgreich §7geladen.");
         corePlayer.sendInfoMessage("§7Du hast die Sprache §b" + corePlayer.getLanguageHumanFriendly() + " §7ausgewählt.");
+
+        event.setJoinMessage("§8[§a+§8] §7" + event.getPlayer().getName());
     }
 }

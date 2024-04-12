@@ -1,5 +1,6 @@
 package net.dbsgameplay.core;
 
+import net.dbsgameplay.core.commands.CommandController;
 import net.dbsgameplay.core.constants.FilePaths;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
@@ -48,7 +49,10 @@ public class DBsGameplayCore extends JavaPlugin {
         instance = this;
 
 
+        CommandController commandController = new CommandController(this);
         this.getServer().getPluginManager().registerEvents(new CorePlayerJoinEvent(this),this);
+
+
 
         this.getServer().getConsoleSender().sendMessage(ChatPrefixes.NETWORK_PREFIX + "DBsGameplay's §5Core §7wurde erfolgreich initialisiert!");
     }

@@ -1,9 +1,10 @@
 package net.dbsgameplay.core.database;
 
 import com.google.common.reflect.ClassPath;
-import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
 import net.dbsgameplay.core.interfaces.IDatabaseProvider;
+import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
@@ -83,6 +84,17 @@ public class DatabaseFactory<T extends JavaPlugin> implements IDatabaseProvider 
     @Nullable
     @Override
     public SessionFactory buildSessionFactory() {
-        return this.configuration == null ? null : this.configuration.buildSessionFactory();
+        try {
+            if (this.configuration == null) {
+                this.logger.log(Level.SEVERE, "The configuration is null");
+                return null;
+            }
+
+            return this.configuration.buildSessionFactory();
+
+        } catch (HibernateException exception) {
+            this.logger.log(Level.SEVERE, "An exception occurred while building the session factory", exception);
+            return null;
+        }
     }
 }

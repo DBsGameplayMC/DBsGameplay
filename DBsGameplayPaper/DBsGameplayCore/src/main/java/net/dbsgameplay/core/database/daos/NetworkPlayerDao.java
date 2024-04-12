@@ -8,9 +8,12 @@ import net.dbsgameplay.core.DBsGameplayCore;
 import net.dbsgameplay.core.database.entities.NetworkPlayer;
 import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
 import org.bukkit.Bukkit;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.internal.build.AllowSysOut;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Table(name = "network_player")
@@ -30,12 +33,30 @@ public class NetworkPlayerDao extends BaseDao<NetworkPlayer, DBsGameplayCore> {
      * @return Spieler, der anhand der UUID gefunden wurde oder null.
      */
     public Optional<NetworkPlayer> getPlayer(final @NotNull String uuid) {
-        CriteriaBuilder criteriaBuilder = this.getCriteriaBuilder();
-        CriteriaQuery<NetworkPlayer> criteriaQuery = this.getCriteriaQuery();
-        Root<NetworkPlayer> root = criteriaQuery.from(NetworkPlayer.class);
-        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("playerUUID"), uuid));
+        Optional<CriteriaBuilder> criteriaBuilderOpt = this.getCriteriaBuilder();
+        Optional<CriteriaQuery<NetworkPlayer>> criteriaQueryOpt = this.getCriteriaQuery();
 
-        NetworkPlayer foundPlayer = this.getOrCreateSession().createQuery(criteriaQuery).uniqueResult();
+        if (criteriaBuilderOpt.isEmpty()) {
+            Bukkit.getLogger().warning("CriteriaBuilder is null");
+            return Optional.empty();
+        }
+
+        if (criteriaQueryOpt.isEmpty()) {
+            Bukkit.getLogger().warning("CriteriaQuery is null");
+            return Optional.empty();
+        }
+
+        Root<NetworkPlayer> root = criteriaQueryOpt.get().from(NetworkPlayer.class);
+        criteriaQueryOpt.get().select(root).where(criteriaBuilderOpt.get().equal(root.get("playerUUID"), uuid));
+
+        Session session = this.getOrCreateSession();
+
+        if (session == null) {
+            Bukkit.getLogger().warning("SessionFactory is null");
+            return Optional.empty();
+        }
+
+        NetworkPlayer foundPlayer = session.createQuery(criteriaQueryOpt.get()).uniqueResult();
 
         return Optional.ofNullable(foundPlayer);
     }
@@ -47,8 +68,22 @@ public class NetworkPlayerDao extends BaseDao<NetworkPlayer, DBsGameplayCore> {
      * @return Sprache des Spielers, der anhand der UUID gefunden wurde oder null.
      */
     public Optional<String> getLanguage(final @NotNull String uuid) {
-        Root<NetworkPlayer> root = getCriteriaQuery().from(NetworkPlayer.class);
-        CriteriaQuery<NetworkPlayer> query = getCriteriaQuery().select(root).where(getCriteriaBuilder().equal(root.get("playerUUID"), uuid));
+        Optional<CriteriaBuilder> criteriaBuilderOpt = this.getCriteriaBuilder();
+        Optional<CriteriaQuery<NetworkPlayer>> criteriaQueryOpt = this.getCriteriaQuery();
+
+        if (criteriaBuilderOpt.isEmpty()) {
+            Bukkit.getLogger().warning("CriteriaBuilder is null");
+            return Optional.empty();
+        }
+
+        if (criteriaQueryOpt.isEmpty()) {
+            Bukkit.getLogger().warning("CriteriaQuery is null");
+            return Optional.empty();
+        }
+
+
+        Root<NetworkPlayer> root = criteriaQueryOpt.get().from(NetworkPlayer.class);
+        CriteriaQuery<NetworkPlayer> query = criteriaQueryOpt.get().select(root).where(criteriaBuilderOpt.get().equal(root.get("playerUUID"), uuid));
 
         String foundLanguage = this.getOrCreateSession().createQuery(query).uniqueResult().getLanguage();
 
@@ -61,17 +96,26 @@ public class NetworkPlayerDao extends BaseDao<NetworkPlayer, DBsGameplayCore> {
      * @param uuid     UUID des Spielers, dessen Sprache aktualisiert werden soll.
      * @param language Sprache, die aktualisiert werden soll.
      */
-    public void updateLanguage(final @NotNull String uuid, final @NotNull String language) {
+    public boolean updateLanguage(final @NotNull String uuid, final @NotNull String language) {
         Optional<NetworkPlayer> player = this.getPlayer(uuid);
 
         if (player.isPresent()) {
             player.get().setLanguage(language);
-            this.persistEntity(player.get());
+            return this.persistEntity(player.get());
         }
+
+        return false;
     }
 
-    public Boolean isPlayerRegistered(final @NotNull String uuid) {
-        return this.getPlayer(uuid).isPresent();
+    public Optional<Boolean> isPlayerRegistered(final @NotNull String uuid) {
+
+        Optional<NetworkPlayer> player = this.getPlayer(uuid);
+
+        if (player.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(true);
     }
 
     public void registerPlayer(final @NotNull NetworkPlayer player) {
@@ -84,11 +128,33 @@ public class NetworkPlayerDao extends BaseDao<NetworkPlayer, DBsGameplayCore> {
     }
 
     @Override
-    protected CriteriaBuilder getCriteriaBuilder() {
-        return this.getOrCreateSession().getCriteriaBuilder();
+    protected Optional<CriteriaBuilder> getCriteriaBuilder() {
+        Session session = this.getOrCreateSession();
+
+        if (session == null) {
+            Bukkit.getLogger().warning("Session is null (DB offline?)");
+            return Optional.empty();
+        }
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+
+         if (builder == null) {
+            Bukkit.getLogger().warning("CriteriaBuilder is null");
+            return Optional.empty();
+         }
+
+        return Optional.of(builder);
     }
 
-    protected CriteriaQuery<NetworkPlayer> getCriteriaQuery() {
-        return this.getCriteriaBuilder().createQuery(NetworkPlayer.class);
+    @Override
+    protected Optional<CriteriaQuery<NetworkPlayer>> getCriteriaQuery() {
+        Optional<CriteriaBuilder> criteriaBuilderOpt = this.getCriteriaBuilder();
+
+        if (criteriaBuilderOpt.isEmpty()) {
+            Bukkit.getLogger().warning("CriteriaBuilder is null");
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(criteriaBuilderOpt.get().createQuery(NetworkPlayer.class));
     }
 }

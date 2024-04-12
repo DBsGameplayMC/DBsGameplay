@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/DBsGameplayCore" />
             <option value="$PROJECT_DIR$/DBsGameplayDungeonCrusher" />
             <option value="$PROJECT_DIR$/DBsGameplaySkyBlock" />
+            <option value="$PROJECT_DIR$/DBsGameplaySurvival" />
           </set>
         </option>
       </GradleProjectSettings>

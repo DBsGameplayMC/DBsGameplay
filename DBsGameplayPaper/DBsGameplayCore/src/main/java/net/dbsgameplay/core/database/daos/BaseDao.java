@@ -13,6 +13,7 @@ import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +40,7 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
      *
      * @param data
      */
-    public void persistEntity(final T data) {
+    public boolean persistEntity(final T data) {
         try (final Session session = this.getOrCreateSession()) {
             session.beginTransaction();
             session.persist(data);
@@ -47,8 +48,10 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
             session.getTransaction().commit();
         } catch (final Exception exception) {
             this.logger.log(Level.SEVERE, "Failed to persist entity", exception);
+            return false;
         } finally {
             session.close();
+            return true;
         }
     }
 
@@ -58,8 +61,11 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
      */
     public Session getOrCreateSession() {
         final SessionFactory sessionFactory = this.getSessionFactory();
-        if (sessionFactory == null)
+        if (sessionFactory == null) {
+            System.out.println("sessionFactory null!");
+
             return null;
+        }
 
         if (this.session == null || !this.session.isOpen())
             this.session = sessionFactory.withOptions().flushMode(FlushMode.AUTO).openSession();
@@ -102,12 +108,12 @@ public abstract class BaseDao<T, P extends JavaPlugin> {
     /**
      * Gibt den CriteriaBuilder zurück, der für die Erstellung von Queries verwendet wird.
      */
-    protected abstract CriteriaBuilder getCriteriaBuilder();
+    protected abstract Optional<CriteriaBuilder> getCriteriaBuilder();
 
     /**
      * Gibt die CriteriaQuery zurück, die für die Erstellung von Queries verwendet wird.
      */
-    protected abstract CriteriaQuery<T> getCriteriaQuery();
+    protected abstract Optional<CriteriaQuery<T>> getCriteriaQuery();
 
     /**
      * Gibt die SessionFactory zurück, die für die Datenbankverbindung verwendet wird.

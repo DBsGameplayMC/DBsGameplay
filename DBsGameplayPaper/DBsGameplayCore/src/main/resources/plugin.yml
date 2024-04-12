@@ -9,3 +9,9 @@ loadbefore:
   - DbsGameplayDungeonCrusher
   - DbsGameplayAdminTool
   - DbsGameplaySkyBlock
+
+commands:
+  fly:
+    aliases: [fliegen, flug]
+    permission: dbsgameplay.core.team.fly
+    description: Fliege wie ein Vogel!
