@@ -4,15 +4,16 @@ import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.constants.Permissions;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
 import net.dbsgameplay.core.database.entities.NetworkPlayer;
+import net.dbsgameplay.core.database.results.DbResult;
+import net.dbsgameplay.core.database.results.DbReturn;
 import net.dbsgameplay.core.enums.Locale;
+import net.dbsgameplay.core.enums.ResultType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -49,28 +50,35 @@ public class CorePlayer {
      * Initialisiert den CorePlayer.
      */
     private void init() {
-        Optional<Boolean> playerExistsOpt = this.networkPlayerDao.isPlayerRegistered(this.player.getUniqueId().toString());
-        System.out.println("playerExistsOpt empty? " + playerExistsOpt.isEmpty());
+        DbReturn playerRegisteredResult = this.networkPlayerDao.isPlayerRegistered(this.player.getUniqueId().toString());
 
-        if (playerExistsOpt.isEmpty()) {
+        if (playerRegisteredResult.getResultType() == ResultType.ERROR) {
             this.player.kickPlayer(ChatPrefixes.NETWORK_PREFIX + "Ein §cFehler §7ist aufgetreten, während wir deine Spieler-Daten geladen haben. Die Datenbank scheint nicht erreichbar zu sein. \n\n §bSollte das Problem weiterhin bestehen, öffne bitte ein Ticket auf unserem Discord!.");
             return;
         }
 
-        if (!playerExistsOpt.get()) {
-            this.networkPlayerDao.registerPlayer(new NetworkPlayer(this));
-            System.out.println("Player was registered");
+        if (playerRegisteredResult.getResultType() == ResultType.NOT_FOUND) {
+            DbReturn registerPlayerResult = this.networkPlayerDao.registerPlayer(new NetworkPlayer(this));
+
+            if (!registerPlayerResult.isSuccessful()) {
+                this.player.kickPlayer(ChatPrefixes.NETWORK_PREFIX + "Ein §cFehler §7ist aufgetreten, während wir deine Spieler-Daten angelegt haben. Bitte versuche es erneut. \n\n §bSollte das Problem weiterhin bestehen, öffne bitte ein Ticket auf unserem Discord!.");
+                return;
+            }
         }
 
-        Optional<NetworkPlayer> networkPlayer = getNetworkPlayer();
+        DbResult<NetworkPlayer> networkPlayerResult = getNetworkPlayer();
+        System.out.println("ResultType: " + networkPlayerResult.getResultType() + " - Message   : " + networkPlayerResult.getMessage());
+        if (!networkPlayerResult.isSuccessful()) {
 
-        if (networkPlayer.isEmpty()) {
             this.player.kickPlayer(ChatPrefixes.NETWORK_PREFIX + "Ein §cFehler §7ist aufgetreten, während wir deine Spieler-Daten geladen haben. Bitte versuche es erneut. \n\n §bSollte das Problem weiterhin bestehen, öffne bitte ein Ticket auf unserem Discord!.");
             return;
         }
 
+        NetworkPlayer networkPlayer = networkPlayerResult.getResult();
+
         // Setze Eigenschaften
-        this.locale = Locale.fromLocaleCode(networkPlayer.get().getLanguage());
+        assert networkPlayer != null;
+        this.locale = Locale.fromLocaleCode(networkPlayer.getLanguage());
     }
 
     /**
@@ -97,7 +105,6 @@ public class CorePlayer {
     }
 
 
-
     /**
      * Gibt das org.bukkit.entity.Player-Objekt des CorePlayers zurück.
      */
@@ -113,13 +120,24 @@ public class CorePlayer {
     }
 
 
-
     // # region Sprache
+
     /**
      * Gibt den Sprach-Code des Spielers zurück.
      */
     public Locale getLocale() {
         return locale;
+    }
+
+    public void setLocale(Locale locale) {
+        if (!saveLanguage().isSuccessful()) {
+            sendErrorMessage("Deine Sprache konnte nicht gespeichert werden. Bitte versuche es erneut.");
+            return;
+        }
+
+        this.locale = locale;
+
+        sendInfoMessage("Deine Sprache §aerfolgreich wurde auf " + getLanguageHumanFriendly() + " geändert.");
     }
 
     /**
@@ -129,27 +147,13 @@ public class CorePlayer {
         return switch (locale) {
             case GERMAN -> "Deutsch";
             case ENGLISH -> "English";
-            default -> "UNKNOWN";
         };
-    }
-
-    public void setLocale(Locale locale) {
-        Locale tmpLocale = this.locale;
-        this.locale = locale;
-
-        if (!saveLanguage()) {
-            sendErrorMessage("Deine Sprache konnte nicht gespeichert werden. Bitte versuche es erneut.");
-            this.locale = tmpLocale;
-            sendInfoMessage("Deine Sprache wurde auf " + getLanguageHumanFriendly() + " zurückgesetzt.");
-            return;
-        }
-
     }
     // #endregion Sprache
 
 
-
     // #region Message-Funktionen
+
     /**
      * Sendet eine Nachricht mit dem ChatPrefixes.NETWORK_PREFIX-Prefix an den Spieler.
      */
@@ -191,16 +195,21 @@ public class CorePlayer {
     // #endregion Message-Funktionen
 
 
-
     // #region Datenbankfunktionen
-    private Optional<NetworkPlayer> getNetworkPlayer() {
-        return this.networkPlayerDao.getPlayer(this.player.getUniqueId().toString());
+    private DbResult<NetworkPlayer> getNetworkPlayer() {
+        DbResult<NetworkPlayer> playerResult = this.networkPlayerDao.getPlayer(this.player.getUniqueId().toString());
+
+        if (!playerResult.isSuccessful()) {
+            return new DbResult<>(null, NetworkPlayer.class, playerResult.getMessage(), playerResult.getResultType());
+        }
+
+        return new DbResult<>(playerResult.getResult(), NetworkPlayer.class, "Player data loaded", ResultType.SUCCESS);
     }
 
     /**
      * Speichert die Sprache des Spielers in der Datenbank.
      */
-    private Boolean saveLanguage() {
+    private DbReturn saveLanguage() {
         return this.networkPlayerDao.updateLanguage(this.getUniqueId().toString(), this.locale.getLocale());
     }
     // #endregion Datenbankfunktionen

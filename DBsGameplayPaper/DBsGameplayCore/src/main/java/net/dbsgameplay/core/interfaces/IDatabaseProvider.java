@@ -1,5 +1,6 @@
 package net.dbsgameplay.core.interfaces;
 
+import net.dbsgameplay.core.database.results.DbResult;
 import org.hibernate.SessionFactory;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,5 +11,5 @@ public interface IDatabaseProvider {
     void includeAnnotatedClasses() throws Exception;
 
     @Nullable
-    SessionFactory buildSessionFactory();
+    DbResult<SessionFactory> buildSessionFactory();
 }

@@ -1,4 +1,4 @@
-Base-Commands:
+Core-Commands:
 - fly
 - gms
 - gma

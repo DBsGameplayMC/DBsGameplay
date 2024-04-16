@@ -25,6 +25,6 @@ public enum Locale {
             }
         }
 
-        return ENGLISH;
+        return GERMAN;
     }
 }
