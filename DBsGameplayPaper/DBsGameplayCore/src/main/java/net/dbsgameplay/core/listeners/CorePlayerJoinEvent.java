@@ -3,6 +3,8 @@ package net.dbsgameplay.core.listeners;
 import net.dbsgameplay.core.DBsGameplayCore;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.database.entities.NetworkPlayer;
+import net.dbsgameplay.core.messages.MessageKey;
+import net.dbsgameplay.core.messages.management.Messages;
 import net.dbsgameplay.core.players.CorePlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -30,6 +32,8 @@ public class CorePlayerJoinEvent implements Listener {
         corePlayer.sendNetworkMessage("§7Willkommen auf " + ChatPrefixes.PREFIX_RGB + "§7, §6" + corePlayer.getPlayer().getName() + "§7!");
         corePlayer.sendDatabaseMessage("Alle Spieler-Daten wurden §aerfolgreich §7geladen.");
         corePlayer.sendInfoMessage("§7Du hast die Sprache §b" + corePlayer.getLanguageHumanFriendly() + " §7ausgewählt.");
+
+        corePlayer.sendTestMessage(MessageKey.COMMON_NOPERMISSION);
 
         event.setJoinMessage("§8[§a+§8] §7" + event.getPlayer().getName());
     }

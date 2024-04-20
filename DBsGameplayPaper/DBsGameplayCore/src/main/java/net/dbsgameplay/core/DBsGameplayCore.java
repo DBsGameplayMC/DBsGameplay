@@ -1,10 +1,12 @@
 package net.dbsgameplay.core;
 
+import com.google.protobuf.Message;
 import net.dbsgameplay.core.commands.CommandController;
 import net.dbsgameplay.core.constants.FilePaths;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
 import net.dbsgameplay.core.listeners.CorePlayerJoinEvent;
+import net.dbsgameplay.core.messages.management.MessageFactory;
 import net.dbsgameplay.core.players.CorePlayer;
 import net.dbsgameplay.core.players.PlayerHandler;
 import net.dbsgameplay.core.utils.ConfigHandler;
@@ -22,9 +24,13 @@ public class DBsGameplayCore extends JavaPlugin {
     private PlayerHandler<CorePlayer> playerHandler;
     private NetworkPlayerDao networkPlayerDao;
 
+    private MessageFactory messageFactory;
+
     @Override
     public void onEnable() {
         playerHandler = new PlayerHandler<>();
+
+        this.messageFactory = new MessageFactory();
         ConfigHandler<MdlDatabaseConfig> databaseConfigConfigHandler = new ConfigHandler<>(new File(FilePaths.DATABASE_CONFIG), MdlDatabaseConfig.class);
         MdlDatabaseConfig databaseConfig = databaseConfigConfigHandler.getConfigModel();
 
@@ -82,4 +88,13 @@ public class DBsGameplayCore extends JavaPlugin {
     public NetworkPlayerDao getNetworkPlayerDao() {
         return networkPlayerDao;
     }
+
+    /**
+     * Gibt die Instanz der MessageFactory zurück.
+     */
+    public MessageFactory getMessageFactory() {
+        return messageFactory;
+    }
+
 }
+

@@ -1,0 +1,5 @@
+messages:
+  common:
+    nopermission: "You do not have permission to use this command."
+    playernotonline: "Player is not online."
+    playernotfound: "Player not found."

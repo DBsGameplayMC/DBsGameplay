@@ -10,8 +10,15 @@ public final class FilePaths {
      */
     public static final String PLUGIN_FOLDER = "plugins/DBsGameplayPaperCore";
 
+    public static final String MESSAGES_FOLDER = PLUGIN_FOLDER + "/messages";
+
     /**
      * Der Pfad zur Konfigurationsdatei der Datenbank.
      */
     public static final String DATABASE_CONFIG = PLUGIN_FOLDER + "/DatabaseConfig.yml";
+
+    /**
+     * Der Pfad zur Konfigurationsdatei der Standard-Nachrichten-Datei.
+     */
+    public static final String DEFAULT_MESSAGES_CONFIG = PLUGIN_FOLDER + "/messages_de.yml";
 }

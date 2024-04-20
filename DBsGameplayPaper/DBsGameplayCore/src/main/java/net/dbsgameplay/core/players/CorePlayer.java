@@ -1,5 +1,6 @@
 package net.dbsgameplay.core.players;
 
+import net.dbsgameplay.core.DBsGameplayCore;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.constants.Permissions;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
@@ -8,6 +9,7 @@ import net.dbsgameplay.core.database.results.DbResult;
 import net.dbsgameplay.core.database.results.DbReturn;
 import net.dbsgameplay.core.enums.Locale;
 import net.dbsgameplay.core.enums.ResultType;
+import net.dbsgameplay.core.messages.MessageKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -172,6 +174,10 @@ public class CorePlayer {
         player.sendMessage(ChatPrefixes.ARROWS_POINTING_RIGHT + messageToSend);
     }
 
+    public void sendTestMessage(MessageKey key) {
+        player.sendMessage(getMessageFromKey(key));
+    }
+
     /**
      * Sendet eine Nachricht mit dem ChatPrefixes.INFO-Prefix an den Spieler.
      */
@@ -191,6 +197,10 @@ public class CorePlayer {
      */
     public void sendErrorMessage(String messageToSend) {
         player.sendMessage(ChatPrefixes.ERROR + messageToSend);
+    }
+
+    private String getMessageFromKey(MessageKey key) {
+        return DBsGameplayCore.getInstance().getMessageFactory().getMessage(key, this.locale.getLocale());
     }
     // #endregion Message-Funktionen
 
