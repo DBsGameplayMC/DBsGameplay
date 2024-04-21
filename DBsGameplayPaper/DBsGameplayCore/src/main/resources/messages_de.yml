@@ -1,5 +1,12 @@
-messages:
-  common:
-    nopermission: "You do not have permission to use this command."
-    playernotonline: "Player is not online."
-    playernotfound: "Player not found."
+languagename: 'Deutsch'
+base:
+  prefixes:
+    # Das Template für jeden Prefix
+    prefixTemplate: '§8§l| §r{prefix} §8§l| §r'
+    # Netzwerk Prefix
+    network: ''
+  nopermission: '&7Dafür hast du &ckeine <hover value="&7Fehlende Berechtigung: &c{permission}">Berechtigung</hover>&7.'
+common:
+  nopermission: 'You do not have permission to use this command.'
+  playernotonline: 'Player is not online.'
+  playernotfound: 'Player not found.'

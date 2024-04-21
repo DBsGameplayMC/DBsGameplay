@@ -2,17 +2,11 @@ package net.dbsgameplay.core.listeners;
 
 import net.dbsgameplay.core.DBsGameplayCore;
 import net.dbsgameplay.core.constants.ChatPrefixes;
-import net.dbsgameplay.core.database.entities.NetworkPlayer;
-import net.dbsgameplay.core.messages.MessageKey;
-import net.dbsgameplay.core.messages.management.Messages;
+import net.dbsgameplay.core.messages.CoreMessages;
 import net.dbsgameplay.core.players.CorePlayer;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-
-import java.util.Optional;
 
 public class CorePlayerJoinEvent implements Listener {
 
@@ -33,7 +27,7 @@ public class CorePlayerJoinEvent implements Listener {
         corePlayer.sendDatabaseMessage("Alle Spieler-Daten wurden §aerfolgreich §7geladen.");
         corePlayer.sendInfoMessage("§7Du hast die Sprache §b" + corePlayer.getLanguageHumanFriendly() + " §7ausgewählt.");
 
-        corePlayer.sendTestMessage(MessageKey.COMMON_NOPERMISSION);
+        corePlayer.sendTestMessage(CoreMessages.COMMON_NOPERMISSION);
 
         event.setJoinMessage("§8[§a+§8] §7" + event.getPlayer().getName());
     }

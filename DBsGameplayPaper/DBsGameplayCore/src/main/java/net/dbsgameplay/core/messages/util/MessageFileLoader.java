@@ -1,14 +1,11 @@
-package net.dbsgameplay.core.messages.management;
+package net.dbsgameplay.core.messages.util;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import net.dbsgameplay.core.constants.FilePaths;
-import net.dbsgameplay.core.messages.MessageKey;
+import net.dbsgameplay.core.interfaces.IMessageBase;
+import net.dbsgameplay.core.messages.CoreMessages;
 import net.dbsgameplay.core.utils.FileUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
 import java.util.HashMap;
@@ -17,31 +14,37 @@ import java.util.Map;
 /**
  * Lädt und speichert die Nachrichten aus einer Datei.
  */
-public class MessagesLoader {
+public class MessageFileLoader<MessageEnum extends Enum<MessageEnum> & IMessageBase> {
+
+    Class<MessageEnum> enumClass;
+
+    public MessageFileLoader(Class<MessageEnum> enumClass) {
+        this.enumClass = enumClass;
+    }
 
     /**
-     * Lädt die Nachrichten aus einer Datei.
-     *
-     * @param file Die Datei, aus der die Nachrichten geladen werden sollen.
-     * @return Die geladenen Nachrichten.
-     * @throws IOException Wenn ein Fehler beim Laden der Nachrichten auftritt.
+     * Lädt Nachrichten aus einer 'message_[language].yml'-Datei
      */
-    public static Messages loadMessages(File file) throws IOException {
-        Map<MessageKey, String> messages = new HashMap<>();
+    public MessageWrapper<MessageEnum> loadMessages(File file) throws IOException {
+        Map<MessageEnum, String> messages = new HashMap<>();
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        for (MessageKey key : MessageKey.values()) {
-            String path = key.getPath();
+        if (config.get("languagename") == null) {
+            Bukkit.getLogger().severe("Could not find key 'languagename' in messages file " + file.getName());
+            return null;
+        }
+
+        for (MessageEnum key : enumClass.getEnumConstants()) {
+            String path = ((CoreMessages) key).getPath();
             if (config.contains(path)) {
                 String message = config.getString(path);
                 messages.put(key, message);
             } else {
-                // Wenn der Schlüssel nicht in der YAML-Datei vorhanden ist, füge eine Standardnachricht ein
-                messages.put(key, "Default message for " + key);
+                messages.put(key, "Please inform an team member: found no message for " + key);
             }
         }
 
-        return new Messages(messages);
+        return new MessageWrapper<>(messages, enumClass);
     }
 
 
@@ -54,9 +57,9 @@ public class MessagesLoader {
 
             FileUtils.createParentDirectories(destinationFile);
 
-            try (InputStream inputStream = MessagesLoader.class.getResourceAsStream("/messages_de.yml"); OutputStream outputStream = new FileOutputStream(destinationFile)) {
+            try (InputStream inputStream = MessageFileLoader.class.getResourceAsStream("/messages_de.yml"); OutputStream outputStream = new FileOutputStream(destinationFile)) {
                 if (inputStream == null) {
-                    Bukkit.getLogger().severe("Could not find default messages file (inputStream is null)");
+                    Bukkit.getLogger().severe("Could not find default messages file in resources (inputStream is null)");
                     return;
                 }
 

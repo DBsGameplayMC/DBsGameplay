@@ -1,11 +1,18 @@
 package net.dbsgameplay.core.messages;
 
-public enum MessageKey {
+import net.dbsgameplay.core.interfaces.IMessageBase;
+
+public enum CoreMessages implements IMessageBase {
+
+    LANGUAGE_NAME("languagename"),
+
+    // Base
+    BASE_PREFIXES_NETWORK("base.prefixes.network"),
 
     // Common
-    COMMON_NOPERMISSION("messages.common.nopermission"),
-    COMMON_PLAYERNOTONLINE("messages.common.playernotonline"),
-    COMMON_PLAYERNOTFOUND("messages.common.playernotfound");
+    COMMON_NOPERMISSION("common.nopermission"),
+    COMMON_PLAYERNOTONLINE("common.playernotonline"),
+    COMMON_PLAYERNOTFOUND("common.playernotfound");
 
     // Commands
     // Fly
@@ -31,12 +38,11 @@ public enum MessageKey {
 
     private final String path;
 
-    MessageKey(String path) {
+    CoreMessages(String path) {
         this.path = path;
     }
 
     public String getPath() {
         return this.path;
     }
-
 }

@@ -7,9 +7,9 @@ import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
 import net.dbsgameplay.core.database.entities.NetworkPlayer;
 import net.dbsgameplay.core.database.results.DbResult;
 import net.dbsgameplay.core.database.results.DbReturn;
-import net.dbsgameplay.core.enums.Locale;
 import net.dbsgameplay.core.enums.ResultType;
-import net.dbsgameplay.core.messages.MessageKey;
+import net.dbsgameplay.core.messages.CoreMessages;
+import net.dbsgameplay.core.messages.MessageFactory;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -27,7 +27,7 @@ public class CorePlayer {
     private final NetworkPlayerDao networkPlayerDao;
 
     // #region Eigenschaften
-    private Locale locale;
+    private String currentLocale;
     // #endregion Eigenschaften
 
 
@@ -80,7 +80,7 @@ public class CorePlayer {
 
         // Setze Eigenschaften
         assert networkPlayer != null;
-        this.locale = Locale.fromLocaleCode(networkPlayer.getLanguage());
+        this.currentLocale = networkPlayer.getLanguage();
     }
 
     /**
@@ -127,17 +127,17 @@ public class CorePlayer {
     /**
      * Gibt den Sprach-Code des Spielers zurück.
      */
-    public Locale getLocale() {
-        return locale;
+    public String getCurrentLocale() {
+        return currentLocale;
     }
 
-    public void setLocale(Locale locale) {
+    public void setCurrentLocale(String currentLocale) {
         if (!saveLanguage().isSuccessful()) {
             sendErrorMessage("Deine Sprache konnte nicht gespeichert werden. Bitte versuche es erneut.");
             return;
         }
 
-        this.locale = locale;
+        this.currentLocale = currentLocale;
 
         sendInfoMessage("Deine Sprache §aerfolgreich wurde auf " + getLanguageHumanFriendly() + " geändert.");
     }
@@ -146,10 +146,7 @@ public class CorePlayer {
      * Gibt die Sprache des Spielers in einem menschenfreundlichen Format zurück.
      */
     public String getLanguageHumanFriendly() {
-        return switch (locale) {
-            case GERMAN -> "Deutsch";
-            case ENGLISH -> "English";
-        };
+        return getMessageFromKey(CoreMessages.LANGUAGE_NAME);
     }
     // #endregion Sprache
 
@@ -174,7 +171,7 @@ public class CorePlayer {
         player.sendMessage(ChatPrefixes.ARROWS_POINTING_RIGHT + messageToSend);
     }
 
-    public void sendTestMessage(MessageKey key) {
+    public void sendTestMessage(CoreMessages key) {
         player.sendMessage(getMessageFromKey(key));
     }
 
@@ -199,8 +196,11 @@ public class CorePlayer {
         player.sendMessage(ChatPrefixes.ERROR + messageToSend);
     }
 
-    private String getMessageFromKey(MessageKey key) {
-        return DBsGameplayCore.getInstance().getMessageFactory().getMessage(key, this.locale.getLocale());
+    /**
+     * Gibt die Nachricht für den angegebenen Schlüssel zurück.
+     */
+    private String getMessageFromKey(CoreMessages key) {
+        return DBsGameplayCore.getInstance().getMessageFactory().getMessage(key, this.currentLocale);
     }
     // #endregion Message-Funktionen
 
@@ -220,7 +220,7 @@ public class CorePlayer {
      * Speichert die Sprache des Spielers in der Datenbank.
      */
     private DbReturn saveLanguage() {
-        return this.networkPlayerDao.updateLanguage(this.getUniqueId().toString(), this.locale.getLocale());
+        return this.networkPlayerDao.updateLanguage(this.getUniqueId().toString(), this.currentLocale);
     }
     // #endregion Datenbankfunktionen
 

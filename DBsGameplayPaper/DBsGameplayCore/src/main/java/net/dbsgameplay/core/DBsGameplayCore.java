@@ -1,18 +1,16 @@
 package net.dbsgameplay.core;
 
-import com.google.protobuf.Message;
 import net.dbsgameplay.core.commands.CommandController;
 import net.dbsgameplay.core.constants.FilePaths;
 import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
 import net.dbsgameplay.core.listeners.CorePlayerJoinEvent;
-import net.dbsgameplay.core.messages.management.MessageFactory;
+import net.dbsgameplay.core.messages.CoreMessages;
+import net.dbsgameplay.core.messages.MessageFactory;
 import net.dbsgameplay.core.players.CorePlayer;
 import net.dbsgameplay.core.players.PlayerHandler;
 import net.dbsgameplay.core.utils.ConfigHandler;
 import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -24,13 +22,14 @@ public class DBsGameplayCore extends JavaPlugin {
     private PlayerHandler<CorePlayer> playerHandler;
     private NetworkPlayerDao networkPlayerDao;
 
-    private MessageFactory messageFactory;
+    private MessageFactory<CoreMessages> messageFactory;
 
     @Override
     public void onEnable() {
         playerHandler = new PlayerHandler<>();
 
-        this.messageFactory = new MessageFactory();
+        this.messageFactory = new MessageFactory<>(CoreMessages.class, CoreMessages.LANGUAGE_NAME);
+
         ConfigHandler<MdlDatabaseConfig> databaseConfigConfigHandler = new ConfigHandler<>(new File(FilePaths.DATABASE_CONFIG), MdlDatabaseConfig.class);
         MdlDatabaseConfig databaseConfig = databaseConfigConfigHandler.getConfigModel();
 
@@ -92,7 +91,7 @@ public class DBsGameplayCore extends JavaPlugin {
     /**
      * Gibt die Instanz der MessageFactory zurück.
      */
-    public MessageFactory getMessageFactory() {
+    public MessageFactory<CoreMessages> getMessageFactory() {
         return messageFactory;
     }
 
