@@ -44,7 +44,7 @@ public class CommandController implements CommandExecutor {
      * Registriert alle Befehle
      */
     private void registerCommands() {
-        // /BlockBreaker
+        // /Fly
         this.cmdFly = new Fly();
         this.registerCommand(this.cmdFly);
     }

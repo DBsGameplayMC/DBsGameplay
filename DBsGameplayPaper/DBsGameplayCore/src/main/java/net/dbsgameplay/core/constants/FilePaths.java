@@ -10,6 +10,9 @@ public final class FilePaths {
      */
     public static final String PLUGIN_FOLDER = "plugins/DBsGameplayPaperCore";
 
+    /**
+     * Der Pfad zum Ordner der Nachrichten-Dateien.
+     */
     public static final String MESSAGES_FOLDER = PLUGIN_FOLDER + "/messages";
 
     /**

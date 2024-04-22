@@ -1,19 +1,16 @@
 package net.dbsgameplay.core.messages.util;
 
+import net.dbsgameplay.core.DBsGameplayCore;
+import net.dbsgameplay.core.constants.ChatPrefixes;
 import net.dbsgameplay.core.constants.FilePaths;
 import net.dbsgameplay.core.interfaces.IMessageBase;
-import net.dbsgameplay.core.messages.CoreMessages;
 import net.dbsgameplay.core.utils.FileUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Lädt und speichert die Nachrichten aus einer Datei.
- */
 public class MessageFileLoader<MessageEnum extends Enum<MessageEnum> & IMessageBase> {
 
     Class<MessageEnum> enumClass;
@@ -23,45 +20,62 @@ public class MessageFileLoader<MessageEnum extends Enum<MessageEnum> & IMessageB
     }
 
     /**
+     * Lädt Nachrichten aus einer Datei.
+     * <p>
      * Lädt Nachrichten aus einer 'message_[language].yml'-Datei
      */
-    public MessageWrapper<MessageEnum> loadMessages(File file) throws IOException {
+    /**
+     * Lädt Nachrichten aus einer 'message_[language].yml'-Datei
+     */
+    public MessageWrapper<MessageEnum> loadMessagesFromFile(File file) throws IOException {
         Map<MessageEnum, String> messages = new HashMap<>();
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+        String language = "";
 
         if (config.get("languagename") == null) {
-            Bukkit.getLogger().severe("Could not find key 'languagename' in messages file " + file.getName());
             return null;
         }
 
-        for (MessageEnum key : enumClass.getEnumConstants()) {
-            String path = ((CoreMessages) key).getPath();
+        language = config.getString("languagename");
+
+        if (language == null || language.isEmpty()) {
+            DBsGameplayCore.getInstance().getServer().getConsoleSender().sendMessage(ChatPrefixes.ERROR + "The message file \"" + file.getName() + "\" could not be loaded: The key 'languagename' was empty.");
+            return new MessageWrapper<>(messages, "unknown");
+        }
+
+
+        for (MessageEnum messageKey : enumClass.getEnumConstants()) {
+            String path = messageKey.getYamlConfigurationPath();
+
             if (config.contains(path)) {
                 String message = config.getString(path);
-                messages.put(key, message);
+                messages.put(messageKey, message);
+
             } else {
-                messages.put(key, "Please inform an team member: found no message for " + key);
+                messages.put(messageKey, "§c§l[Found no message for §b§l\"" + messageKey + "\" (YAML Path: " + messageKey.getYamlConfigurationPath() + ")§c§l, please inform an team member.]");
             }
         }
 
-        return new MessageWrapper<>(messages, enumClass);
+        return new MessageWrapper<>(messages, language);
     }
-
 
     /**
      * Kopiert die Standardnachrichten in das Zielverzeichnis, wenn sie noch nicht vorhanden sind.
      */
     public static void copyDefaultMessages() {
         File destinationFile = new File(FilePaths.MESSAGES_FOLDER, "messages_de.yml");
-        if (!destinationFile.exists()) {
 
+        if (!destinationFile.exists()) {
             FileUtils.createParentDirectories(destinationFile);
 
-            try (InputStream inputStream = MessageFileLoader.class.getResourceAsStream("/messages_de.yml"); OutputStream outputStream = new FileOutputStream(destinationFile)) {
-                if (inputStream == null) {
-                    Bukkit.getLogger().severe("Could not find default messages file in resources (inputStream is null)");
-                    return;
-                }
+            InputStream inputStream = MessageFileLoader.class.getResourceAsStream("/messages_de.yml");
+
+            if (inputStream == null) {
+                DBsGameplayCore.getInstance().getServer().getConsoleSender().sendMessage(ChatPrefixes.ERROR + "Could not find default messages file in resources (inputStream is null)");
+                return;
+            }
+
+            try (OutputStream outputStream = new FileOutputStream(destinationFile)) {
 
                 byte[] buffer = new byte[1024];
                 int length;
@@ -71,7 +85,7 @@ public class MessageFileLoader<MessageEnum extends Enum<MessageEnum> & IMessageB
                 }
 
             } catch (IOException e) {
-                Bukkit.getLogger().severe("Could not copy default messages file: " + e.getMessage());
+                DBsGameplayCore.getInstance().getServer().getConsoleSender().sendMessage(ChatPrefixes.ERROR + "Could not copy default messages file: " + e.getMessage());
             }
         }
     }

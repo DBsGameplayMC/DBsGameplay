@@ -25,9 +25,13 @@ public class CorePlayerJoinEvent implements Listener {
 
         corePlayer.sendNetworkMessage("§7Willkommen auf " + ChatPrefixes.PREFIX_RGB + "§7, §6" + corePlayer.getPlayer().getName() + "§7!");
         corePlayer.sendDatabaseMessage("Alle Spieler-Daten wurden §aerfolgreich §7geladen.");
-        corePlayer.sendInfoMessage("§7Du hast die Sprache §b" + corePlayer.getLanguageHumanFriendly() + " §7ausgewählt.");
+        corePlayer.sendInfoMessage("§7Du hast die Sprache §b" + corePlayer.getLanguageHumanFriendly() + " §7ausgewählt.\n\n");
 
+        corePlayer.sendInfoMessage("Nachrichten aus der messages.yml:");
         corePlayer.sendTestMessage(CoreMessages.COMMON_NOPERMISSION);
+        corePlayer.sendTestMessage(CoreMessages.COMMON_PLAYERNOTONLINE);
+        corePlayer.sendTestMessage(CoreMessages.COMMON_PLAYERNOTFOUND);
+        corePlayer.sendTestMessage(CoreMessages.COMMANDS_FLY_ENABLED);
 
         event.setJoinMessage("§8[§a+§8] §7" + event.getPlayer().getName());
     }

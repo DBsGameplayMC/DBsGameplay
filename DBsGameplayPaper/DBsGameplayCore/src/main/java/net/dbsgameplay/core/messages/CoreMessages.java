@@ -6,17 +6,14 @@ public enum CoreMessages implements IMessageBase {
 
     LANGUAGE_NAME("languagename"),
 
-    // Base
-    BASE_PREFIXES_NETWORK("base.prefixes.network"),
-
     // Common
     COMMON_NOPERMISSION("common.nopermission"),
     COMMON_PLAYERNOTONLINE("common.playernotonline"),
-    COMMON_PLAYERNOTFOUND("common.playernotfound");
+    COMMON_PLAYERNOTFOUND("common.playernotfound"),
 
     // Commands
     // Fly
-   // COMMANDS_FLY_ENABLED("commands.fly.enabled"),
+   COMMANDS_FLY_ENABLED("commands.fly.enabled");
    // COMMANDS_FLY_DISABLED("commands.fly.disabled"),
    // COMMANDS_FLY_ENABLED_OTHERS("commands.fly.enabledothers"),
    // COMMANDS_FLY_DISABLED_OTHERS("commands.fly.disabledothers"),
@@ -42,7 +39,7 @@ public enum CoreMessages implements IMessageBase {
         this.path = path;
     }
 
-    public String getPath() {
+    public String getYamlConfigurationPath() {
         return this.path;
     }
 }

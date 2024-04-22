@@ -9,7 +9,6 @@ import net.dbsgameplay.core.database.results.DbResult;
 import net.dbsgameplay.core.database.results.DbReturn;
 import net.dbsgameplay.core.enums.ResultType;
 import net.dbsgameplay.core.messages.CoreMessages;
-import net.dbsgameplay.core.messages.MessageFactory;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -146,7 +145,7 @@ public class CorePlayer {
      * Gibt die Sprache des Spielers in einem menschenfreundlichen Format zurück.
      */
     public String getLanguageHumanFriendly() {
-        return getMessageFromKey(CoreMessages.LANGUAGE_NAME);
+        return DBsGameplayCore.getInstance().getMessageFactory().getLanguageFromCode(this.currentLocale);
     }
     // #endregion Sprache
 

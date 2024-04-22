@@ -26,8 +26,9 @@ public class DBsGameplayCore extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        playerHandler = new PlayerHandler<>();
+        instance = this;
 
+        playerHandler = new PlayerHandler<>();
         this.messageFactory = new MessageFactory<>(CoreMessages.class, CoreMessages.LANGUAGE_NAME);
 
         ConfigHandler<MdlDatabaseConfig> databaseConfigConfigHandler = new ConfigHandler<>(new File(FilePaths.DATABASE_CONFIG), MdlDatabaseConfig.class);
@@ -51,7 +52,6 @@ public class DBsGameplayCore extends JavaPlugin {
         }
 
         this.networkPlayerDao = new NetworkPlayerDao(this, databaseConfig);
-        instance = this;
 
 
         CommandController commandController = new CommandController(this);
