@@ -4,7 +4,7 @@ import com.google.common.reflect.ClassPath;
 import net.dbsgameplay.core.database.results.DbResult;
 import net.dbsgameplay.core.enums.ResultType;
 import net.dbsgameplay.core.interfaces.IDatabaseProvider;
-import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.utils.config.MdlDatabaseConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;

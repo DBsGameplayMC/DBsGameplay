@@ -6,6 +6,8 @@ import net.dbsgameplay.core.constants.FilePaths;
 import net.dbsgameplay.core.interfaces.IMessageBase;
 import net.dbsgameplay.core.messages.util.MessageFileLoader;
 import net.dbsgameplay.core.messages.util.MessageWrapper;
+import net.dbsgameplay.core.messages.util.placeholders.ConfigTag;
+import net.dbsgameplay.core.messages.util.placeholders.PlaceholderUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -70,6 +72,8 @@ public class MessageFactory<MessageEnum extends Enum<MessageEnum> & IMessageBase
         }
 
         String message = messages.getMessage(key);
+        ConfigTag tag = PlaceholderUtils.parseTag(messages.getMessage(key));
+
         return ChatColor.translateAlternateColorCodes('&', message);
     }
 

@@ -6,11 +6,12 @@ package net.dbsgameplay.core.constants;
 public final class ChatPrefixes {
 
     public static final String PREFIX_RGB = "§x§9§8§6§3§E§7D§x§9§2§7§0§E§4B§x§8§D§7§C§E§0s§x§8§7§8§9§D§DG§x§8§1§9§6§D§9a§x§7§C§A§3§D§6m§x§7§6§A§F§D§3e§x§7§0§B§C§C§Fp§x§6§A§C§9§C§Cl§x§6§5§D§5§C§8a§x§5§F§E§2§C§5y";
+    public static final String PREFIX_RGB_FAT = "§x§9§8§6§3§E§7§lD§x§9§2§7§0§E§4§lB§x§8§D§7§C§E§0§ls§x§8§7§8§9§D§D§lG§x§8§1§9§6§D§9§la§x§7§C§A§3§D§6§lm§x§7§6§A§F§D§3§le§x§7§0§B§C§C§F§lp§x§6§A§C§9§C§C§ll§x§6§5§D§5§C§8§la§x§5§F§E§2§C§5§ly";
 
     /**
      * Präfix des DBsGameplay Minecraft-Netzwerks.
      */
-    public static final String NETWORK_PREFIX = applyPrefixTemplate(PREFIX_RGB);
+    public static final String NETWORK_PREFIX = applyPrefixTemplate(PREFIX_RGB_FAT);
 
     /**
      * Präfix für Datenbankoperationen.
@@ -46,7 +47,7 @@ public final class ChatPrefixes {
      * Fügt das Präfix-Template zu einem Präfix hinzu.
      */
     public static String applyPrefixTemplate(String prefix) {
-        return"§8§l| §r" + prefix + " §7>§8> §7";
+        return "§8§l| §r" + prefix + " §7§l>§8§l> §7";
     }
 
 }

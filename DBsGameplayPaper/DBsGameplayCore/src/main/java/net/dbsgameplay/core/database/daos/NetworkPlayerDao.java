@@ -1,6 +1,5 @@
 package net.dbsgameplay.core.database.daos;
 
-import com.google.gson.reflect.TypeToken;
 import jakarta.persistence.Table;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -11,16 +10,11 @@ import net.dbsgameplay.core.database.entities.NetworkPlayer;
 import net.dbsgameplay.core.database.results.DbResult;
 import net.dbsgameplay.core.database.results.DbReturn;
 import net.dbsgameplay.core.enums.ResultType;
-import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.utils.config.MdlDatabaseConfig;
 import org.bukkit.Bukkit;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.internal.build.AllowSysOut;
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.text.html.Option;
-import java.lang.reflect.Type;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

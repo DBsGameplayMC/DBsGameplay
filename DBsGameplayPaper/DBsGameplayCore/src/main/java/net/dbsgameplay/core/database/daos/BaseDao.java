@@ -6,16 +6,14 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import net.dbsgameplay.core.database.results.DbResult;
 import net.dbsgameplay.core.database.results.DbReturn;
 import net.dbsgameplay.core.enums.ResultType;
-import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.utils.config.MdlDatabaseConfig;
 import net.dbsgameplay.core.database.DatabaseFactory;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

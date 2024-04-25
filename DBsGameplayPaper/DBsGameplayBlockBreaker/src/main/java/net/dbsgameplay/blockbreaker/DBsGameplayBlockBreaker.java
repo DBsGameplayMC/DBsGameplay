@@ -10,7 +10,7 @@ import net.dbsgameplay.blockbreaker.utils.constants.ChatPrefixes;
 import net.dbsgameplay.blockbreaker.utils.constants.FilePaths;
 import net.dbsgameplay.core.database.daos.NetworkPlayerDao;
 import net.dbsgameplay.core.utils.ConfigHandler;
-import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.utils.config.MdlDatabaseConfig;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;

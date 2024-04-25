@@ -1,4 +1,4 @@
-package net.dbsgameplay.core.utils.configmodels;
+package net.dbsgameplay.core.utils.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

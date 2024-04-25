@@ -10,7 +10,7 @@ import net.dbsgameplay.core.messages.MessageFactory;
 import net.dbsgameplay.core.players.CorePlayer;
 import net.dbsgameplay.core.players.PlayerHandler;
 import net.dbsgameplay.core.utils.ConfigHandler;
-import net.dbsgameplay.core.utils.configmodels.MdlDatabaseConfig;
+import net.dbsgameplay.core.utils.config.MdlDatabaseConfig;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
