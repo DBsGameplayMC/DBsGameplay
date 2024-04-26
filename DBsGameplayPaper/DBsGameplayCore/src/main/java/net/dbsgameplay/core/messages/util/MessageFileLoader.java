@@ -52,7 +52,7 @@ public class MessageFileLoader<MessageEnum extends Enum<MessageEnum> & IMessageB
                 messages.put(messageKey, message);
 
             } else {
-                messages.put(messageKey, "§c§l[Found no message for §b§l\"" + messageKey + "\" (YAML Path: " + messageKey.getYamlConfigurationPath() + ")§c§l, please inform an team member.]");
+                messages.put(messageKey, "&c&l[Found no message for &b&l\"" + messageKey + "\" (YAML Path: " + messageKey.getYamlConfigurationPath() + ")&c&l, please inform an team member.]");
             }
         }
 

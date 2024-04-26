@@ -35,7 +35,7 @@ public class CorePlayerJoinEvent implements Listener {
         corePlayer.getPlayer().sendMessage(ChatPrefixes.DATABASE_PREFIX);
 
         corePlayer.sendInfoMessage("Nachrichten aus der messages.yml:");
-        corePlayer.sendTestMessage(CoreMessages.COMMON_NOPERMISSION);
+        corePlayer.sendTestMessage(CoreMessages.COMMON_NOPERMISSION, "super.tolles.permission.node");
         corePlayer.sendTestMessage(CoreMessages.COMMON_PLAYERNOTONLINE);
         corePlayer.sendTestMessage(CoreMessages.COMMON_PLAYERNOTFOUND);
         corePlayer.sendTestMessage(CoreMessages.COMMANDS_FLY_ENABLED);

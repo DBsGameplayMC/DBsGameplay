@@ -170,8 +170,8 @@ public class CorePlayer {
         player.sendMessage(ChatPrefixes.ARROWS_POINTING_RIGHT + messageToSend);
     }
 
-    public void sendTestMessage(CoreMessages key) {
-        player.sendMessage(getMessageFromKey(key));
+    public void sendTestMessage(CoreMessages key, String... parameters) {
+        player.sendMessage(getMessageFromKey(key, parameters));
     }
 
     /**
@@ -198,8 +198,8 @@ public class CorePlayer {
     /**
      * Gibt die Nachricht für den angegebenen Schlüssel zurück.
      */
-    private String getMessageFromKey(CoreMessages key) {
-        return DBsGameplayCore.getInstance().getMessageFactory().getMessage(key, this.currentLocale);
+    private Component getMessageFromKey(CoreMessages key, String... parameters) {
+        return DBsGameplayCore.getInstance().getMessageFactory().getMessage(key, this.currentLocale, parameters);
     }
     // #endregion Message-Funktionen
 

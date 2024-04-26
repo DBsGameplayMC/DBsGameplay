@@ -1,5 +1,6 @@
-languagename: 'Deutsch'
+languagename: "Deutsch"
 common:
-  nopermission: '&7Dafür hast du &ckeine <hover value="&7Fehlende Berechtigung: &c{permission}">Berechtigung</hover>&7.'
-  playernotonline: '&7Der Spieler &6{player} &7ist nicht online.'
-  playernotfound: '&7Der Spieler &6{player} &7wurde nicht gefunden.'
+  # 0 = Permission
+  nopermission: "&7Dafür hast du &ckeine <hover:show_text:'&7Fehlende Berechtigung: &c{0}'>&7Berechtigung</hover>&7."
+  playernotonline: "&7Der Spieler &6{player} &7ist nicht online."
+  playernotfound: "&7Der Spieler &6{player} &7wurde nicht gefunden."

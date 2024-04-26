@@ -6,9 +6,9 @@ import net.dbsgameplay.core.constants.FilePaths;
 import net.dbsgameplay.core.interfaces.IMessageBase;
 import net.dbsgameplay.core.messages.util.MessageFileLoader;
 import net.dbsgameplay.core.messages.util.MessageWrapper;
-import net.dbsgameplay.core.messages.util.placeholders.ConfigTag;
-import net.dbsgameplay.core.messages.util.placeholders.PlaceholderUtils;
-import org.bukkit.Bukkit;
+import net.dbsgameplay.core.messages.util.Placeholders;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.ChatColor;
 
 import java.io.File;
@@ -47,7 +47,9 @@ public class MessageFactory<MessageEnum extends Enum<MessageEnum> & IMessageBase
 
                     messages.put(fileLanguage, messageFileLoader.loadMessagesFromFile(file));
 
-                    String languageName = getMessage(languageNameKey, fileLanguage);
+                    PlainTextComponentSerializer serializer = PlainTextComponentSerializer.plainText();
+                    String languageName = serializer.serialize(getMessage(languageNameKey, fileLanguage));
+
                     DBsGameplayCore.getInstance().getServer().getConsoleSender().sendMessage(ChatPrefixes.INFO + "Die Nachrichten aus der Datei \"" + file.getName() + "\" für die Sprache " + fileLanguage + " (" + languageName + ") wurden §aerfolgreich §7geladen.");
                 } catch (IOException e) {
                     DBsGameplayCore.getInstance().getServer().getConsoleSender().sendMessage(ChatPrefixes.ERROR + "Die Nachrichten aus der Datei \"" + file.getName() + "\" konnten §cnicht §7geladen werden: " + e.getMessage());
@@ -59,7 +61,7 @@ public class MessageFactory<MessageEnum extends Enum<MessageEnum> & IMessageBase
     /**
      * Gibt Nachrichten anhand der Sprache aus den Dateien im Ordner FilePaths.MESSAGES_FOLDER zurück.
      */
-    public String getMessage(MessageEnum key, String languageCode, String... placeholderValues) {
+    public Component getMessage(MessageEnum key, String languageCode, String... placeholderValues) {
         MessageWrapper<MessageEnum> messages = this.messages.get(languageCode);
 
         if (messages == null) {
@@ -68,13 +70,12 @@ public class MessageFactory<MessageEnum extends Enum<MessageEnum> & IMessageBase
         }
 
         if (messages == null) {
-            return "§c§l[Found no language entry for languageCode §b§l\"" + languageCode + "\"§c§l, please inform an team member.]";
+            return Component.text("&c&l[Found no message for key \"" + key + "\" in language \"" + languageCode + "\", please inform an team member.]");
         }
 
         String message = messages.getMessage(key);
-        ConfigTag tag = PlaceholderUtils.parseTag(messages.getMessage(key));
 
-        return ChatColor.translateAlternateColorCodes('&', message);
+        return Placeholders.parseMessage(message, placeholderValues);
     }
 
     /**
