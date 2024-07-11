@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/DBsGameplay.iml" filepath="$PROJECT_DIR$/.idea/DBsGameplay.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplayAdminTool/DBsGameplayPaper.DBsGameplayAdminTool.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplayAdminTool/DBsGameplayPaper.DBsGameplayAdminTool.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplayBlockBreaker/DBsGameplayPaper.DBsGameplayBlockBreaker.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplayBlockBreaker/DBsGameplayPaper.DBsGameplayBlockBreaker.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplayBlockBreaker/DBsGameplayPaper.DBsGameplayBlockBreaker.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplayBlockBreaker/DBsGameplayPaper.DBsGameplayBlockBreaker.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplayCore/DBsGameplayPaper.DBsGameplayCore.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplayCore/DBsGameplayPaper.DBsGameplayCore.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplaySurvival/DBsGameplayPaper.DBsGameplaySurvival.main.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplaySurvival/DBsGameplayPaper.DBsGameplaySurvival.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/DBsGameplaySurvival/DBsGameplayPaper.DBsGameplaySurvival.test.iml" filepath="$PROJECT_DIR$/.idea/modules/DBsGameplaySurvival/DBsGameplayPaper.DBsGameplaySurvival.test.iml" />
+    </modules>
+  </component>
+</project>

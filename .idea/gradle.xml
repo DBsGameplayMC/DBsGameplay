@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/DBsGameplayPaper" />
+        <option name="gradleJvm" value="corretto-19" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/DBsGameplayPaper" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayAdminTool" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayBlockBreaker" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayCore" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplayDungeonCrusher" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplaySkyBlock" />
+            <option value="$PROJECT_DIR$/DBsGameplayPaper/DBsGameplaySurvival" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
